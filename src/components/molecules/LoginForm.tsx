@@ -1,16 +1,17 @@
 import styled from "styled-components";
+import { useAuth } from "../../context/auth";
 import useInput from "../../hooks/useInput";
-import { fetchLogin } from "../../services/api";
 import Button from "../atoms/Button";
 import InputBox from "../atoms/InputBox";
 
 const LoginForm = () => {
   const { input: id, onChange: onChangeId } = useInput("");
   const { input: password, onChange: onChangePassword } = useInput("");
+  const { login } = useAuth();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetchLogin({ id, pw: password });
+    login({ id, pw: password });
   };
 
   return (
