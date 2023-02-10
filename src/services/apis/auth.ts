@@ -10,5 +10,6 @@ export const fetchRefreshAuth = () => {
 };
 
 const instance = axios.create({
-  baseURL: `${import.meta.env.REACT_APP_BACKEND_URL}/auth`,
+  baseURL: `${import.meta.env.VITE_BACKEND_URL}/auth`,
+  withCredentials: true,
 });
