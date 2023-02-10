@@ -4,15 +4,23 @@ import { color } from "../../styles/palette";
 type Theme = "default" | "danger";
 
 const Button = ({
-  theme = "default",
   value,
+  theme = "default",
+  onClick,
 }: {
-  theme?: Theme;
   value: string;
+  theme?: Theme;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }) => {
   return (
     <>
-      <StyledButton theme={theme}>{value}</StyledButton>
+      {onClick ? (
+        <StyledButton theme={theme} onClick={onClick}>
+          {value}
+        </StyledButton>
+      ) : (
+        <StyledButton theme={theme}>{value}</StyledButton>
+      )}
     </>
   );
 };
@@ -23,6 +31,12 @@ const StyledButton = styled.button<{ theme: Theme }>`
   width: 100%;
   height: 32px;
   border: 0;
+  &:hover {
+    cursor: pointer;
+  }
+  &:disabled {
+    background-color: ${color.gray6};
+  }
   ${(props) => {
     switch (props.theme) {
       case "default":
