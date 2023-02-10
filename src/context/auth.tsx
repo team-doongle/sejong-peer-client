@@ -7,7 +7,7 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleError } from "../error";
-import { fetchLogin } from "../services/api";
+import { fetchLogin } from "../services/apis/auth";
 import { fetchRefreshAuth } from "../services/apis/auth";
 import { AuthContextProps } from "../types/auth";
 
