@@ -7,8 +7,9 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleError } from "../error";
-import { fetchLogin } from "../services/apis/auth";
+import { fetchLogin, fetchLogout } from "../services/apis/auth";
 import { fetchRefreshAuth } from "../services/apis/auth";
+import { storage } from "../storage";
 import { AuthContextProps } from "../types/auth";
 
 const AuthContext = createContext<AuthContextProps>(null!);
@@ -19,7 +20,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login: AuthContextProps["login"] = async (props) => {
     try {
-      await fetchLogin(props);
+      const res = await fetchLogin(props);
+      const token = res.data.accessToken;
+      if (!token) throw new Error("no token");
+      storage.set("ACCESS_TOKEN", token);
       setIsAuth(true);
       navigator("/select");
     } catch (err) {
@@ -27,14 +31,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const logout: AuthContextProps["logout"] = () => {
-    setIsAuth(false);
-    navigator("/login");
+  const logout: AuthContextProps["logout"] = async () => {
+    try {
+      await fetchLogout();
+      storage.remove("ACCESS_TOKEN");
+      setIsAuth(false);
+      navigator("/login");
+    } catch (err) {
+      handleError(err);
+    }
   };
 
   const refreshAuth = async () => {
     try {
-      await fetchRefreshAuth();
+      const res = await fetchRefreshAuth();
+      const token = res.data.accessToken;
+      if (!token) throw new Error("no token");
+      storage.set("ACCESS_TOKEN", token);
       setIsAuth(true);
     } catch (err) {
       handleError(err);

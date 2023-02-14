@@ -1,12 +1,20 @@
 import axios from "axios";
-import { FetchLoginRequest } from "../models/authSchema";
+import {
+  FetchLoginRequest,
+  FetchLoginResponse,
+  FetchRefresh,
+} from "../models/authSchema";
 
 export const fetchLogin = (props: FetchLoginRequest) => {
-  return instance.post("login", props);
+  return instance.post<FetchLoginResponse>("login", props);
+};
+
+export const fetchLogout = () => {
+  return instance.post("logout");
 };
 
 export const fetchRefreshAuth = () => {
-  return instance.get("refresh");
+  return instance.get<FetchRefresh>("refresh");
 };
 
 const instance = axios.create({
