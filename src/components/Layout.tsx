@@ -18,5 +18,3 @@ const StyledContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-const StyledWapper = styled.div``;

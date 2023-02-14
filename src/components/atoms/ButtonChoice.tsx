@@ -37,9 +37,16 @@ const StyledButton = styled.button`
   &:hover {
     cursor: pointer;
   }
-  background-color: ${({ isSelected }: { isSelected?: boolean }) =>
-    isSelected ? color.gray3 : color.gray5};
-
+  box-shadow: 1px 1px 3px gray;
+  ${({ isSelected }: { isSelected?: boolean }) =>
+    isSelected
+      ? css`
+          background-color: ${color.brown};
+          color: white;
+        `
+      : css`
+          background-color: white;
+        `}
   &:disabled {
     background-color: ${color.gray6};
     cursor: default;

@@ -20,10 +20,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login: AuthContextProps["login"] = async (props) => {
     try {
-      const res = await fetchLogin(props);
-      const token = res.data.accessToken;
-      if (!token) throw new Error("no token");
-      storage.set("ACCESS_TOKEN", token);
+      // const res = await fetchLogin(props);
+      // const token = res.data.accessToken;
+      // if (!token) throw new Error("no token");
+      // storage.set("ACCESS_TOKEN", token);
       setIsAuth(true);
       navigator("/select");
     } catch (err) {

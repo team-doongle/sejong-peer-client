@@ -28,26 +28,14 @@ const Button = ({
 export default Button;
 
 const StyledButton = styled.button<{ theme: Theme }>`
-  width: 100%;
-  height: 32px;
+  width: 80px;
+  height: 80px;
   border: 0;
+  background-color: ${color.brown};
+  border-radius: 3px;
+  color: white;
+  flex-shrink: 0;
   &:hover {
     cursor: pointer;
   }
-  &:disabled {
-    background-color: ${color.gray6};
-  }
-  ${(props) => {
-    switch (props.theme) {
-      case "default":
-        return css`
-          background-color: ${color.gray5};
-        `;
-      case "danger":
-        return css`
-          background-color: ${color.red};
-          color: ${color.white};
-        `;
-    }
-  }}
 `;

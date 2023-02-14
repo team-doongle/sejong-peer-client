@@ -17,14 +17,18 @@ const LoginForm = () => {
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>
-        <InputBox placeholder={"아이디"} value={id} onChange={onChangeId} />
-        <InputBox
-          placeholder={"비밀번호"}
-          value={password}
-          onChange={onChangePassword}
-          type="password"
-        />
-        <Button value={"제출"} />
+        <StyledContainer>
+          <StyledWrapper>
+            <InputBox placeholder={"아이디"} value={id} onChange={onChangeId} />
+            <InputBox
+              placeholder={"비밀번호"}
+              value={password}
+              onChange={onChangePassword}
+              type="password"
+            />
+          </StyledWrapper>
+          <Button value={"로그인"} />
+        </StyledContainer>
       </StyledForm>
     </>
   );
@@ -33,8 +37,19 @@ const LoginForm = () => {
 export default LoginForm;
 
 const StyledForm = styled.form`
-  width: 248px;
   & > input {
+    margin-bottom: 16px;
+  }
+`;
+
+const StyledContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledWrapper = styled.div`
+  margin-right: 16px;
+  & > input:first-child {
     margin-bottom: 16px;
   }
 `;

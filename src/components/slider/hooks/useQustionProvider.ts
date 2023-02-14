@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
+import { QuestionProps } from "../../../services/models/questionShecma";
+import { QuestionCardProps } from "../components/QuestionCards";
 import useSliderButton from "./useSliderButton";
 
-interface UseQuestionProviderProps {
-  questions: {
-    title: string;
-    choices: string[];
-  }[];
-}
-
-const useQuestionProvider = ({ questions }: UseQuestionProviderProps) => {
-  const [answerList, setAnswerList] = useState<string[][]>([]);
+const useQuestionProvider = (questions: QuestionProps[]) => {
+  const [answerList, setAnswerList] = useState<string[]>([]);
 
   const {
     itemIndex: questionIndex,
@@ -26,7 +21,7 @@ const useQuestionProvider = ({ questions }: UseQuestionProviderProps) => {
     answerList[questionIndex].length > 0 &&
     questions.length - 1 >= questionIndex;
 
-  const handleChoice = (choice: string[]) => {
+  const handleChoice: QuestionCardProps["handleChoice"] = (choice) => {
     const newAnswerList = answerList.slice();
     newAnswerList.splice(questionIndex, 1, choice);
     setAnswerList(newAnswerList);
@@ -53,6 +48,7 @@ const useQuestionProvider = ({ questions }: UseQuestionProviderProps) => {
     onClickPrev,
     onClickNext,
     handleChoice,
+    answerList,
   };
 };
 

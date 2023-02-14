@@ -15,7 +15,7 @@ export default InputBox;
 const StyledInput = styled.input`
   width: 100%;
   height: 32px;
-  background-color: ${color.gray6};
-  border: 0;
+  border: 0px;
+  border-bottom: 1px solid black;
   padding: 0 8px;
 `;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 const MainLogo = () => {
   return (
     <>
-      <StyledLogo src="/assets/mainLogo.png" />
+      <StyledLogo src="/assets/character/main.jpg" />
     </>
   );
 };
@@ -11,6 +11,6 @@ const MainLogo = () => {
 export default MainLogo;
 
 const StyledLogo = styled.img`
-  width: 160px;
-  height: 160px;
+  width: 192px;
+  height: 128px;
 `;
