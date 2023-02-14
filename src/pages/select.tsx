@@ -8,10 +8,10 @@ import { useAuth } from "../context/auth";
 import questions from "../services/static/questions.json";
 
 export default function SelectPage() {
-  const { refreshAuth } = useAuth();
+  const { isAuth, refreshAuth } = useAuth();
 
   useEffect(() => {
-    refreshAuth();
+    if (!isAuth) refreshAuth();
   }, []);
   return (
     <>
