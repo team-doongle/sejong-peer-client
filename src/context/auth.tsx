@@ -50,10 +50,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       storage.set("ACCESS_TOKEN", token);
       setIsAuth(true);
     } catch (err) {
-      handleError(err);
       navigator("/login");
     }
   };
+
+  useEffect(() => {
+    refreshAuth();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isAuth, login, logout, refreshAuth }}>
