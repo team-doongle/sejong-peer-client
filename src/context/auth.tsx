@@ -55,12 +55,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  useEffect(() => {
-    refreshAuth();
-  }, []);
-
   return (
-    <AuthContext.Provider value={{ isAuth, login, logout }}>
+    <AuthContext.Provider value={{ isAuth, login, logout, refreshAuth }}>
       {children}
     </AuthContext.Provider>
   );
