@@ -1,7 +1,7 @@
 export type FetchGetPoolRequest = {
-  gender: "MALE" | "FEMALE";
-  purpose: "GET_SENIOR" | "GET_JUNIOR";
-  targetGender: "MALE" | "FEMALE" | "ALL";
+  gender: string;
+  purpose: string;
+  targetGender: string;
 };
 
 export type FetchGetPoolResponse = {
@@ -11,9 +11,9 @@ export type FetchGetPoolResponse = {
 };
 
 export type FetchPostPoolRequest = {
-  gender: "MALE" | "FEMALE";
-  purpose: "GET_SENIOR" | "GET_JUNIOR";
-  targetGender: "MALE" | "FEMALE" | "ALL";
+  gender: string;
+  purpose: string;
+  targetGender: string;
   phoneNumber: string;
 };
 

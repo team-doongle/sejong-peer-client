@@ -20,7 +20,7 @@ export const fetchGetUser = () => {
 };
 
 export const fetchPostBreak = () => {
-  return instance.post("breack");
+  return instance.post("break");
 };
 
 const instance = axios.create({
@@ -30,6 +30,6 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   const token = storage.get("ACCESS_TOKEN");
-  if (token) throw new Error("no token : at match api");
+  if (!token) throw new Error("no token : at match api");
   return { ...config, headers: { Authorization: `Bearer ${token}` } };
 });

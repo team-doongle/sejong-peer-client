@@ -4,6 +4,7 @@ import useQuestionProvider from "../hooks/useQustionProvider";
 import Button from "../../atoms/Button";
 import { QuestionProps } from "../../../services/models/questionShecma";
 import InputBox from "../../atoms/InputBox";
+import { fetchPostPool } from "../../../services/apis/match";
 
 type QuestionProviderProps = {
   questions: QuestionProps[];
@@ -24,7 +25,15 @@ export default function QuestionContainer({
     answerList,
   } = useQuestionProvider(questions);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e: any) => {
+    e.preventEvent();
+    fetchPostPool({
+      gender: answerList[0],
+      purpose: answerList[1],
+      targetGender: answerList[2],
+      phoneNumber: answerList[3],
+    });
+  };
 
   return (
     <>
@@ -32,34 +41,39 @@ export default function QuestionContainer({
         <img src={questions[questionIndex].imageSrc} alt="charater" />
       </StyledImageContainer>
       <StyledTitle>{questions[questionIndex].title}</StyledTitle>
-      <StyledContainer providerWidth={providerWidth}>
-        <StyledWrapper transitionX={questionIndex * providerWidth}>
-          {questions.map(({ choices, type }, i) => (
-            <StyledQuestionCardWrapper key={i}>
-              {type === "select" ? (
-                <QuestionCards choices={choices} handleChoice={handleChoice} />
-              ) : type === "input" ? (
-                <InputBox
-                  type="tel"
-                  onChange={(e: any) => {
-                    if (e.target.value.length === 11)
-                      handleChoice(e.target.value);
-                  }}
-                />
-              ) : type === "submit" ? (
-                <>
+      <form onSubmit={handleSubmit}>
+        <StyledContainer providerWidth={providerWidth}>
+          <StyledWrapper transitionX={questionIndex * providerWidth}>
+            {questions.map(({ choices, type }, i) => (
+              <StyledQuestionCardWrapper key={i}>
+                {type === "select" ? (
+                  <QuestionCards
+                    choices={choices}
+                    handleChoice={handleChoice}
+                  />
+                ) : type === "input" ? (
+                  <InputBox
+                    type="tel"
+                    onChange={(e: any) => {
+                      if (e.target.value.length === 11)
+                        handleChoice(e.target.value);
+                    }}
+                  />
+                ) : type === "submit" ? (
                   <>
-                    {answerList.map((e) => (
-                      <div>{e}</div>
-                    ))}
+                    <>
+                      {answerList.map((e) => (
+                        <div>{e}</div>
+                      ))}
+                    </>
+                    <Button value="submit" />
                   </>
-                  <Button value="submit" />
-                </>
-              ) : null}
-            </StyledQuestionCardWrapper>
-          ))}
-        </StyledWrapper>
-      </StyledContainer>
+                ) : null}
+              </StyledQuestionCardWrapper>
+            ))}
+          </StyledWrapper>
+        </StyledContainer>
+      </form>
       <StyledQuestionCounter>
         <button onClick={onClickPrev} disabled={disablePrev}>
           {"<"}
