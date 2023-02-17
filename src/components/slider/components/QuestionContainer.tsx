@@ -5,6 +5,7 @@ import Button from "../../atoms/Button";
 import { QuestionProps } from "../../../services/models/questionShecma";
 import InputBox from "../../atoms/InputBox";
 import { fetchPostPool } from "../../../services/apis/match";
+import { makeAnswer } from "../../../services/static/questions";
 
 type QuestionProviderProps = {
   questions: QuestionProps[];
@@ -27,12 +28,7 @@ export default function QuestionContainer({
 
   const handleSubmit = (e: any) => {
     e.preventEvent();
-    fetchPostPool({
-      gender: answerList[0],
-      purpose: answerList[1],
-      targetGender: answerList[2],
-      phoneNumber: answerList[3],
-    });
+    fetchPostPool(makeAnswer(answerList));
   };
 
   return (

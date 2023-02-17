@@ -1,3 +1,4 @@
+import { FetchPostPoolRequest } from "../models/matchSchema";
 import { QuestionProps } from "../models/questionShecma";
 
 export const questions: QuestionProps[] = [
@@ -38,3 +39,26 @@ export const questions: QuestionProps[] = [
     imageSrc: "/assets/character/6.jpg",
   },
 ];
+
+export function makeAnswer(answers: any) {
+  const getGender = (): FetchPostPoolRequest["gender"] =>
+    answers[0] === "남자" ? "MALE" : "FEMALE";
+  const getPurpose = (): FetchPostPoolRequest["purpose"] =>
+    answers[1] === "짝선배 구하기" ? "GET_SENIOR" : "GET_JUNIOR";
+  const getTargetGender = (): FetchPostPoolRequest["targetGender"] =>
+    answers[2] === "동성" ? getGender() : "ALL";
+  const getTargetBoundary = (): FetchPostPoolRequest["targetBoundary"] =>
+    answers[3] === "우리 학과 선베"
+      ? "MAJOR"
+      : answers[3] === "우리 단과대 선배"
+      ? "COLLEGE"
+      : "ALL";
+  const getPhoneNumber = (): FetchPostPoolRequest["phoneNumber"] => answers[4];
+  return {
+    gender: getGender(),
+    purpose: getPurpose(),
+    targetGender: getTargetGender(),
+    targetBoundary: getTargetBoundary(),
+    phoneNumber: getPhoneNumber(),
+  };
+}
