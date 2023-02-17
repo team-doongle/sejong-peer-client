@@ -1,16 +1,13 @@
 import styled from "styled-components";
-import { color } from "../../styles/palette";
 
 // TODO: any 제거
-const InputBox = (props: any) => {
+export default function InputBox(props: any) {
   return (
     <>
       <StyledInput {...props} />
     </>
   );
-};
-
-export default InputBox;
+}
 
 const StyledInput = styled.input`
   width: 100%;
