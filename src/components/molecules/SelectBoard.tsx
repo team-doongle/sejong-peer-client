@@ -1,18 +1,36 @@
 import styled from "styled-components";
-import { fetchPostPool } from "../../services/apis/match";
-import { makeAnswer, questions } from "../../services/static/questions";
+import { fetchGetPool, fetchPostPool } from "../../services/apis/match";
+import { convertAnswer, questions } from "../../services/static/questions";
 import HorizonBoard from "../atoms/HorizonBoard";
 import { useEffect, useState } from "react";
 import QuestionCards, { QuestionCardProps } from "../atoms/QuestionCards";
 import { useHorizonBoard } from "../../context/horizonBoardContext";
 import InputBox from "../atoms/InputBox";
 import Button from "../atoms/Button";
+import { useQuery } from "react-query";
+import { FetchGetPoolRequest } from "../../services/models/matchSchema";
+
+import { handleError } from "../../error";
 
 export default function SelectBoard() {
   const { itemIndex: questionIndex, movePrev, moveNext } = useHorizonBoard();
   const [answerList, setAnswerList] = useState<string[]>([]);
   const [disablePrev, setDisablePrev] = useState(false);
   const [disableNext, setDisableNext] = useState(false);
+  const { data: peerCounts } = useQuery(
+    ["getPool"],
+    () =>
+      fetchGetPool({
+        gender: answerList[0] as FetchGetPoolRequest["gender"],
+        purpose: answerList[1] as FetchGetPoolRequest["purpose"],
+        targetGender: answerList[2] as FetchGetPoolRequest["targetGender"],
+      }),
+    {
+      enabled:
+        answerList[0] !== "" && answerList[1] !== "" && answerList[2] !== "",
+      select: ({ data }) => [data.major, data.college, data.all],
+    }
+  );
 
   const checkReciveAnswer = () =>
     answerList[questionIndex] &&
@@ -24,10 +42,41 @@ export default function SelectBoard() {
     newAnswerList.splice(questionIndex, 1, choice);
     setAnswerList(newAnswerList);
   };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+      fetchPostPool(convertAnswer(answerList));
+    } catch (err) {
+      handleError(err);
+    }
+  };
+
   const SelectComponents = questions.map(({ choices, type }) => {
     switch (type) {
       case "select":
         return <QuestionCards choices={choices} handleChoice={handleChoice} />;
+      case "select-with-describe":
+        return (
+          <QuestionCards
+            choices={choices}
+            handleChoice={handleChoice}
+            describes={peerCounts?.map((count) =>
+              count ? (
+                <div>
+                  현재 <span>{count}</span>명의 짝이
+                  <br />
+                  기다리고 있습니다.
+                </div>
+              ) : (
+                <div>
+                  해당 범위에는
+                  <br /> 기다리는 짝이 없습니다.
+                </div>
+              )
+            )}
+          />
+        );
       case "input":
         return (
           <InputBox
@@ -48,11 +97,6 @@ export default function SelectBoard() {
         );
     }
   });
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    fetchPostPool(makeAnswer(answerList));
-  };
 
   useEffect(() => {
     if (answerList[questionIndex] && answerList[questionIndex].length) {

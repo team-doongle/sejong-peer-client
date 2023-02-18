@@ -1,15 +1,17 @@
 import styled from "styled-components";
-import { useState, useEffect, useRef, Fragment } from "react";
+import { useState, useEffect, useRef, Fragment, ReactNode } from "react";
 import ButtonChoice from "./ButtonChoice";
 
 export type QuestionCardProps = {
   choices: string[];
   handleChoice: (choice: string) => void;
+  describes?: ReactNode[];
 };
 
 export default function QuestionCards({
   choices,
   handleChoice,
+  describes,
 }: QuestionCardProps) {
   const isInitailRendering = useRef(true);
   const [selectedChoice, setSelectedChoice] = useState<string>("");
@@ -32,12 +34,14 @@ export default function QuestionCards({
   return (
     <StyledChoicesContainer>
       <>
-        {choices.map((curChoice) => (
-          <Fragment key={curChoice}>
+        {choices.map((choice, i) => (
+          <Fragment key={choice}>
             <ButtonChoice
-              value={curChoice}
-              onClick={() => onClickChoice(curChoice)}
-              isSelected={checkSelected(curChoice)}
+              value={choice}
+              title={choice}
+              describe={describes?.[i]}
+              onClick={() => onClickChoice(choice)}
+              isSelected={checkSelected(choice)}
             />
           </Fragment>
         ))}

@@ -1,5 +1,12 @@
-import { FetchPostPoolRequest } from "../models/matchSchema";
 import { QuestionProps } from "../models/questionShecma";
+import {
+  FetchPostPoolRequest,
+  constTypeCheck,
+  genderConstArray,
+  purposeConstArray,
+  targetGenderConstArray,
+  targetBoundaryConstArray,
+} from "../../services/models/matchSchema";
 
 export const questions: QuestionProps[] = [
   {
@@ -23,7 +30,7 @@ export const questions: QuestionProps[] = [
   {
     title: "어떤 짝을 원하시나요?",
     choices: ["우리 학과 선배", "우리 단과대 선배", "상관 없음"],
-    type: "select",
+    type: "select-with-describe",
     imageSrc: "/assets/character/4.jpg",
   },
   {
@@ -40,25 +47,37 @@ export const questions: QuestionProps[] = [
   },
 ];
 
-export function makeAnswer(answers: any) {
-  const getGender = (): FetchPostPoolRequest["gender"] =>
+export function convertAnswer(answers: any) {
+  const convertGender = (): FetchPostPoolRequest["gender"] =>
     answers[0] === "남자" ? "MALE" : "FEMALE";
-  const getPurpose = (): FetchPostPoolRequest["purpose"] =>
+  const convertPurpose = (): FetchPostPoolRequest["purpose"] =>
     answers[1] === "짝선배 구하기" ? "GET_SENIOR" : "GET_JUNIOR";
-  const getTargetGender = (): FetchPostPoolRequest["targetGender"] =>
-    answers[2] === "동성" ? getGender() : "ALL";
-  const getTargetBoundary = (): FetchPostPoolRequest["targetBoundary"] =>
+  const convertTargetGender = (): FetchPostPoolRequest["targetGender"] =>
+    answers[2] === "동성" ? convertGender() : "ALL";
+  const convertTargetBoundary = (): FetchPostPoolRequest["targetBoundary"] =>
     answers[3] === "우리 학과 선베"
       ? "MAJOR"
       : answers[3] === "우리 단과대 선배"
       ? "COLLEGE"
       : "ALL";
-  const getPhoneNumber = (): FetchPostPoolRequest["phoneNumber"] => answers[4];
+  const convertPhoneNumber = (): FetchPostPoolRequest["phoneNumber"] =>
+    answers[4];
+
+  const checkValid = () => {
+    return (
+      constTypeCheck(genderConstArray, answers[0]) &&
+      constTypeCheck(purposeConstArray, answers[1]) &&
+      constTypeCheck(targetGenderConstArray, answers[2]) &&
+      constTypeCheck(targetBoundaryConstArray, answers[3])
+    );
+  };
+  if (!checkValid())
+    throw new Error("잘못된 응답이 있습니다. 질문지를 확인해주세요.");
   return {
-    gender: getGender(),
-    purpose: getPurpose(),
-    targetGender: getTargetGender(),
-    targetBoundary: getTargetBoundary(),
-    phoneNumber: getPhoneNumber(),
+    gender: convertGender(),
+    purpose: convertPurpose(),
+    targetGender: convertTargetGender(),
+    targetBoundary: convertTargetBoundary(),
+    phoneNumber: convertPhoneNumber(),
   };
 }
