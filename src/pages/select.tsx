@@ -1,12 +1,14 @@
 import Layout from "../components/Layout";
-import QuestionContainer from "../components/slider/components/QuestionContainer";
-import { questions } from "../services/static/questions";
+import SelectBoard from "../components/molecules/SelectBoard";
+import { HorizonBoardProvider } from "../context/horizonBoardContext";
 
 export default function SelectPage() {
   return (
     <>
       <Layout>
-        <QuestionContainer questions={questions}></QuestionContainer>
+        <HorizonBoardProvider>
+          <SelectBoard />
+        </HorizonBoardProvider>
       </Layout>
     </>
   );

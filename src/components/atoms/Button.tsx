@@ -7,15 +7,17 @@ const Button = ({
   value,
   theme = "default",
   onClick,
+  type = "button",
 }: {
   value: string;
   theme?: Theme;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  type?: "button" | "submit" | "reset";
 }) => {
   return (
     <>
       {onClick ? (
-        <StyledButton theme={theme} onClick={onClick}>
+        <StyledButton theme={theme} onClick={onClick} type={type}>
           {value}
         </StyledButton>
       ) : (

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef, Fragment } from "react";
-import ButtonChoice from "../../atoms/ButtonChoice";
+import ButtonChoice from "./ButtonChoice";
 
 export type QuestionCardProps = {
   choices: string[];
@@ -14,15 +14,15 @@ export default function QuestionCards({
   const isInitailRendering = useRef(true);
   const [selectedChoice, setSelectedChoice] = useState<string>("");
 
-  const onClickChoice = (selectedChoice: string, wasSelected: boolean) => {
-    if (wasSelected) {
+  const checkSelected = (choice: string) => selectedChoice === choice;
+
+  const onClickChoice = (selectedChoice: string) => {
+    if (checkSelected(selectedChoice)) {
       setSelectedChoice("");
     } else {
       setSelectedChoice(selectedChoice);
     }
   };
-
-  const checkSelected = (choice: string) => selectedChoice === choice;
 
   useEffect(() => {
     if (isInitailRendering.current) isInitailRendering.current = false;
@@ -36,9 +36,9 @@ export default function QuestionCards({
           <Fragment key={curChoice}>
             <ButtonChoice
               value={curChoice}
-              onClick={() => onClickChoice(curChoice, checkSelected(curChoice))}
+              onClick={() => onClickChoice(curChoice)}
               isSelected={checkSelected(curChoice)}
-            ></ButtonChoice>
+            />
           </Fragment>
         ))}
         {choices.length % 2 === 0 ? null : <ButtonChoice disabled />}

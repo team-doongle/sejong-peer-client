@@ -6,11 +6,13 @@ export default function ButtonChoice({
   onClick,
   disabled,
   isSelected,
+  describe,
 }: {
   value?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
   isSelected?: boolean;
+  describe?: string;
 }) {
   return (
     <>
@@ -21,6 +23,7 @@ export default function ButtonChoice({
         isSelected={isSelected}
       >
         {value}
+        <div>{describe}</div>
       </StyledButton>
     </>
   );
