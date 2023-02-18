@@ -1,35 +1,29 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { color } from "../../styles/palette";
-
-type Theme = "default" | "danger";
 
 const Button = ({
   value,
-  theme = "default",
   onClick,
+  text,
   type = "button",
 }: {
   value: string;
-  theme?: Theme;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  text?: string;
   type?: "button" | "submit" | "reset";
 }) => {
   return (
     <>
-      {onClick ? (
-        <StyledButton theme={theme} onClick={onClick} type={type}>
-          {value}
-        </StyledButton>
-      ) : (
-        <StyledButton theme={theme}>{value}</StyledButton>
-      )}
+      <StyledButton onClick={onClick} type={type} value={value}>
+        {text ?? value}
+      </StyledButton>
     </>
   );
 };
 
 export default Button;
 
-const StyledButton = styled.button<{ theme: Theme }>`
+const StyledButton = styled.button`
   width: 80px;
   height: 80px;
   border: 0;

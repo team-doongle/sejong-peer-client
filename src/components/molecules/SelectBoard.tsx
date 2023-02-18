@@ -49,6 +49,11 @@ export default function SelectBoard() {
     }
   });
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    fetchPostPool(makeAnswer(answerList));
+  };
+
   useEffect(() => {
     if (answerList[questionIndex] && answerList[questionIndex].length) {
       moveNext();
@@ -61,11 +66,6 @@ export default function SelectBoard() {
     setDisableNext(questionIndex >= questions.length - 1);
     setDisableNext(!checkReciveAnswer());
   }, [questionIndex]);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    fetchPostPool(makeAnswer(answerList));
-  };
 
   return (
     <>

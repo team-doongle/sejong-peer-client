@@ -27,7 +27,7 @@ const LoginForm = () => {
               type="password"
             />
           </StyledWrapper>
-          <Button value={"로그인"} />
+          <Button value={"로그인"} type={"submit"} />
         </StyledContainer>
       </StyledForm>
     </>
