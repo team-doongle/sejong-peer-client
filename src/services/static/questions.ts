@@ -73,11 +73,12 @@ export function convertAnswer(answers: any) {
       constTypeCheck(genderConstArray, gender) &&
       constTypeCheck(purposeConstArray, purpose) &&
       constTypeCheck(targetGenderConstArray, targetGender) &&
-      constTypeCheck(targetBoundaryConstArray, targetBoundary)
+      constTypeCheck(targetBoundaryConstArray, targetBoundary) &&
+      /(010([0-9]{8}))/.test(phoneNumber)
     );
   };
   if (!checkValid())
-    throw new Error("잘못된 응답이 있습니다. 질문지를 확인해주세요.");
+    throw new Error("잘못된 응답이 있습니다.\n 입력하신 정보를 확인해주세요.");
   return {
     gender,
     purpose,
