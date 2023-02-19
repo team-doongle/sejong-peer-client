@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import LoginForm from "../components/molecules/LoginForm";
-import MainLogo from "../components/atoms/MainLogo";
 
 export default function LoginPage() {
   return (

@@ -11,15 +11,19 @@ import { fetchLogin, fetchLogout } from "../services/apis/auth";
 import { fetchRefreshAuth } from "../services/apis/auth";
 import { storage } from "../storage";
 import { AuthContextProps } from "../types/auth";
+import { useLoading } from "./loadingContext";
 
 const AuthContext = createContext<AuthContextProps>(null!);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuth, setIsAuth] = useState(false);
+  const { setIsLoading } = useLoading();
+
   const navigator = useNavigate();
 
   const login: AuthContextProps["login"] = async (props) => {
     try {
+      setIsLoading(true);
       const res = await fetchLogin(props);
       const token = res.data.accessToken;
       if (!token) throw new Error("no token");
@@ -28,6 +32,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       navigator("/");
     } catch (err) {
       handleError(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 

@@ -19,12 +19,18 @@ const LoginForm = () => {
       <StyledForm onSubmit={handleSubmit}>
         <StyledContainer>
           <StyledWrapper>
-            <InputBox placeholder={"아이디"} value={id} onChange={onChangeId} />
+            <InputBox
+              placeholder={"아이디"}
+              value={id}
+              onChange={onChangeId}
+              required
+            />
             <InputBox
               placeholder={"비밀번호"}
               value={password}
               onChange={onChangePassword}
               type="password"
+              required
             />
           </StyledWrapper>
           <Button value={"로그인"} type={"submit"} />
