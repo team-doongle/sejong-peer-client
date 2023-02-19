@@ -43,7 +43,7 @@ export default App;
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   const { isAuth } = useAuth();
-  queryClient.invalidateQueries({ queryKey: "state" });
+  queryClient.invalidateQueries({ queryKey: ["state"] });
   return <>{isAuth ? children : <Navigate to="/login" replace />}</>;
 }
 
