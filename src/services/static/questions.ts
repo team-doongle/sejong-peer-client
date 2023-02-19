@@ -63,21 +63,26 @@ export function convertAnswer(answers: any) {
   const convertPhoneNumber = (): FetchPostPoolRequest["phoneNumber"] =>
     answers[4];
 
+  const gender = convertGender();
+  const purpose = convertPurpose();
+  const targetGender = convertTargetGender();
+  const targetBoundary = convertTargetBoundary();
+  const phoneNumber = convertPhoneNumber();
   const checkValid = () => {
     return (
-      constTypeCheck(genderConstArray, answers[0]) &&
-      constTypeCheck(purposeConstArray, answers[1]) &&
-      constTypeCheck(targetGenderConstArray, answers[2]) &&
-      constTypeCheck(targetBoundaryConstArray, answers[3])
+      constTypeCheck(genderConstArray, gender) &&
+      constTypeCheck(purposeConstArray, purpose) &&
+      constTypeCheck(targetGenderConstArray, targetGender) &&
+      constTypeCheck(targetBoundaryConstArray, targetBoundary)
     );
   };
   if (!checkValid())
     throw new Error("잘못된 응답이 있습니다. 질문지를 확인해주세요.");
   return {
-    gender: convertGender(),
-    purpose: convertPurpose(),
-    targetGender: convertTargetGender(),
-    targetBoundary: convertTargetBoundary(),
-    phoneNumber: convertPhoneNumber(),
+    gender,
+    purpose,
+    targetGender,
+    targetBoundary,
+    phoneNumber,
   };
 }
