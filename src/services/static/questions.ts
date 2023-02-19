@@ -71,7 +71,7 @@ export const convertPhoneNumber = (
 export function convertAnswer(answers: any) {
   const gender = convertGender(answers[0]);
   const purpose = convertPurpose(answers[1]);
-  const targetGender = convertTargetGender(answers[2], gender);
+  const targetGender = convertTargetGender(answers[2], answers[0]);
   const targetBoundary = convertTargetBoundary(answers[3]);
   const phoneNumber = convertPhoneNumber(answers[4]);
   const checkValid = () => {
