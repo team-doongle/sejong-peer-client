@@ -17,12 +17,14 @@ import { useQuery } from "react-query";
 import { FetchGetPoolRequest } from "../../services/models/matchSchema";
 
 import { handleError } from "../../error";
+import { useNavigate } from "react-router-dom";
 
 export default function SelectBoard() {
   const { itemIndex: questionIndex, movePrev, moveNext } = useHorizonBoard();
   const [answerList, setAnswerList] = useState<string[]>([]);
   const [disablePrev, setDisablePrev] = useState(false);
   const [disableNext, setDisableNext] = useState(false);
+  const navigator = useNavigate();
   const { data: peerCounts } = useQuery(
     ["getPool"],
     () =>
@@ -52,10 +54,12 @@ export default function SelectBoard() {
     setAnswerList(newAnswerList);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      fetchPostPool(convertAnswer(answerList));
+      const res = await fetchPostPool(convertAnswer(answerList));
+      if (res.status === 200) navigator("/");
+      else throw new Error(`요청이 실패했습니다. error code: ${res.status}`);
     } catch (err) {
       handleError(err);
     }
