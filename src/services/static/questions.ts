@@ -47,27 +47,33 @@ export const questions: QuestionProps[] = [
   },
 ];
 
-export function convertAnswer(answers: any) {
-  const convertGender = (): FetchPostPoolRequest["gender"] =>
-    answers[0] === "남자" ? "MALE" : "FEMALE";
-  const convertPurpose = (): FetchPostPoolRequest["purpose"] =>
-    answers[1] === "짝선배 구하기" ? "GET_SENIOR" : "GET_JUNIOR";
-  const convertTargetGender = (): FetchPostPoolRequest["targetGender"] =>
-    answers[2] === "동성" ? convertGender() : "ALL";
-  const convertTargetBoundary = (): FetchPostPoolRequest["targetBoundary"] =>
-    answers[3] === "우리 학과 선베"
-      ? "MAJOR"
-      : answers[3] === "우리 단과대 선배"
-      ? "COLLEGE"
-      : "ALL";
-  const convertPhoneNumber = (): FetchPostPoolRequest["phoneNumber"] =>
-    answers[4];
+export const convertGender = (prop: string): FetchPostPoolRequest["gender"] =>
+  prop === "남자" ? "MALE" : "FEMALE";
+export const convertPurpose = (prop: string): FetchPostPoolRequest["purpose"] =>
+  prop === "짝선배 구하기" ? "GET_SENIOR" : "GET_JUNIOR";
+export const convertTargetGender = (
+  prop: string,
+  gender: string
+): FetchPostPoolRequest["targetGender"] =>
+  prop === "동성" ? convertGender(gender) : "ALL";
+export const convertTargetBoundary = (
+  prop: string
+): FetchPostPoolRequest["targetBoundary"] =>
+  prop === "우리 학과 선베"
+    ? "MAJOR"
+    : prop === "우리 단과대 선배"
+    ? "COLLEGE"
+    : "ALL";
+export const convertPhoneNumber = (
+  prop: string
+): FetchPostPoolRequest["phoneNumber"] => prop;
 
-  const gender = convertGender();
-  const purpose = convertPurpose();
-  const targetGender = convertTargetGender();
-  const targetBoundary = convertTargetBoundary();
-  const phoneNumber = convertPhoneNumber();
+export function convertAnswer(answers: any) {
+  const gender = convertGender(answers[0]);
+  const purpose = convertPurpose(answers[1]);
+  const targetGender = convertTargetGender(answers[2], gender);
+  const targetBoundary = convertTargetBoundary(answers[3]);
+  const phoneNumber = convertPhoneNumber(answers[4]);
   const checkValid = () => {
     return (
       constTypeCheck(genderConstArray, gender) &&

@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { fetchGetPool, fetchPostPool } from "../../services/apis/match";
-import { convertAnswer, questions } from "../../services/static/questions";
+import {
+  convertAnswer,
+  convertGender,
+  convertPurpose,
+  convertTargetGender,
+  questions,
+} from "../../services/static/questions";
 import HorizonBoard from "../atoms/HorizonBoard";
 import { useEffect, useState } from "react";
 import QuestionCards, { QuestionCardProps } from "../atoms/QuestionCards";
@@ -21,9 +27,12 @@ export default function SelectBoard() {
     ["getPool"],
     () =>
       fetchGetPool({
-        gender: answerList[0] as FetchGetPoolRequest["gender"],
-        purpose: answerList[1] as FetchGetPoolRequest["purpose"],
-        targetGender: answerList[2] as FetchGetPoolRequest["targetGender"],
+        gender: convertGender(answerList[0]),
+        purpose: convertPurpose(answerList[1]),
+        targetGender: convertTargetGender(
+          answerList[2],
+          convertGender(answerList[0])
+        ),
       }),
     {
       enabled:
@@ -84,15 +93,20 @@ export default function SelectBoard() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               if (e.target.value.length === 11) handleChoice(e.target.value);
             }}
+            style={{ width: "80%" }}
           />
         );
       case "submit":
         return (
           <>
-            {answerList.map((e, key) => (
-              <div key={key}>{e}</div>
-            ))}
-            <Button value="submit" type="submit" />
+            <div>
+              {answerList.map((e, key) => (
+                <div style={{ margin: 10 }} key={key}>
+                  {e}
+                </div>
+              ))}
+            </div>
+            <Button value="제출하기" type="submit" />
           </>
         );
     }
