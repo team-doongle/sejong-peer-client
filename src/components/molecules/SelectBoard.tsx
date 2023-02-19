@@ -31,10 +31,7 @@ export default function SelectBoard() {
       fetchGetPool({
         gender: convertGender(answerList[0]),
         purpose: convertPurpose(answerList[1]),
-        targetGender: convertTargetGender(
-          answerList[2],
-          convertGender(answerList[0])
-        ),
+        targetGender: convertTargetGender(answerList[2], answerList[0]),
       }),
     {
       enabled:
