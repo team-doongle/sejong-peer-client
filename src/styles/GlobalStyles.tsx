@@ -12,13 +12,9 @@ const GlobalStyles = createGlobalStyle`
         font-size: 12px;
     }
     body {
-        font-family: "Noto Sans KR"
+        font-family: "Noto Sans KR";
     }
 
-    @font-face {
-        font-family: "Noto Sans KR";
-        src: url("/assets/fonts/NotoSansKR-Regular.otf");
-    }
 `;
 
 export default GlobalStyles;
