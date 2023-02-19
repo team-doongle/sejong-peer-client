@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <StyledContainer>
-      <div>{children}</div>
+      <StyledWrapper>{children}</StyledWrapper>
     </StyledContainer>
   );
 };
@@ -17,4 +17,9 @@ const StyledContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const StyledWrapper = styled.div`
+  width: 400px;
+  height: 80vh;
 `;

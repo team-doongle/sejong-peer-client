@@ -24,6 +24,7 @@ const StyledBlack = styled.div`
   overflow: auto;
   position: fixed;
   user-select: none;
+  z-index: 2;
 `;
 const StyledContainer = styled.div`
   max-width: 100%;
@@ -39,4 +40,5 @@ const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
   user-select: none;
+  z-index: 3;
 `;

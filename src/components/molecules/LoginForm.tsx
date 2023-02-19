@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAuth } from "../../context/auth";
 import useInput from "../../hooks/useInput";
-import Button from "../atoms/Button";
+import ButtonLogin from "../atoms/ButtonLogin";
 import InputBox from "../atoms/InputBox";
 
 const LoginForm = () => {
@@ -33,7 +33,7 @@ const LoginForm = () => {
               required
             />
           </StyledWrapper>
-          <Button value={"로그인"} type={"submit"} />
+          <ButtonLogin value={"로그인"} type={"submit"} />
         </StyledContainer>
       </StyledForm>
     </>

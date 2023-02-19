@@ -39,12 +39,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout: AuthContextProps["logout"] = async () => {
     try {
+      setIsLoading(true);
       await fetchLogout();
       storage.remove("ACCESS_TOKEN");
       setIsAuth(false);
       navigator("/login");
     } catch (err) {
       handleError(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 

@@ -49,4 +49,8 @@ const StyledWrapper = styled.div<{ transitionX: number }>`
 const StyledQuestionCardWrapper = styled.div`
   flex-shrink: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

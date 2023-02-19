@@ -95,6 +95,7 @@ export default function SelectBoard() {
         return (
           <InputBox
             type="tel"
+            name="phone"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               if (e.target.value.length === 11) handleChoice(e.target.value);
             }}
@@ -140,20 +141,19 @@ export default function SelectBoard() {
         <HorizonBoard itemComponents={SelectComponents} />
       </form>
       <StyledQuestionCounter>
-        <button onClick={movePrev} disabled={disablePrev}>
-          {"<"}
-        </button>
+        <StyledButtonLeft onClick={movePrev} disabled={disablePrev} />
         {questionIndex + 1} / {questions.length}
-        <button onClick={moveNext} disabled={disableNext}>
-          {">"}
-        </button>
+        <StyledButtonRight onClick={moveNext} disabled={disableNext} />
       </StyledQuestionCounter>
     </>
   );
 }
 
 const StyledQuestionCounter = styled.div`
-  text-align: center;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledImageContainer = styled.div`
@@ -170,4 +170,31 @@ const StyledTitle = styled.h2`
   text-align: center;
   box-sizing: border-box;
   padding: 1rem 0;
+`;
+
+const StyledButton = styled.button`
+  width: 50px;
+  height: 20px;
+  border: 0;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+  }
+`;
+
+const StyledButtonLeft = styled(StyledButton)`
+  background-image: url("/assets/image/left-active.png");
+  &:disabled {
+    background-image: url("/assets/image/left-disable.png");
+  }
+`;
+
+const StyledButtonRight = styled(StyledButton)`
+  background-image: url("/assets/image/right-active.png");
+  &:disabled {
+    background-image: url("/assets/image/right-disable.png");
+  }
 `;

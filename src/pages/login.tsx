@@ -4,17 +4,27 @@ import LoginForm from "../components/molecules/LoginForm";
 
 export default function LoginPage() {
   return (
-    <Layout>
+    <>
       <StyledContainer>
-        <img src="/assets/character/main.png" alt="main character" />
-        <StyledTitle>세종 짝짓기</StyledTitle>
-        <LoginForm />
+        <StyledWrapper>
+          <img src="/assets/character/main.png" alt="main character" />
+          <StyledTitle>Sejong Peer !</StyledTitle>
+          <LoginForm />
+        </StyledWrapper>
       </StyledContainer>
-    </Layout>
+    </>
   );
 }
 
 const StyledContainer = styled.div`
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;

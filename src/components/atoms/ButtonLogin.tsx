@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { color } from "../../styles/palette";
 
-export default function Button({
+export default function ButtonLogin({
   value,
   onClick,
   text,
@@ -22,8 +22,8 @@ export default function Button({
 }
 
 const StyledButton = styled.button`
-  width: 80%;
-  height: 32px;
+  width: 80px;
+  height: 80px;
   border: 0;
   background-color: ${color.brown};
   border-radius: 3px;
