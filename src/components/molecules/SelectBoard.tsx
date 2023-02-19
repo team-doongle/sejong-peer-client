@@ -14,10 +14,10 @@ import { useHorizonBoard } from "../../context/horizonBoardContext";
 import InputBox from "../atoms/InputBox";
 import Button from "../atoms/Button";
 import { useQuery } from "react-query";
-import { FetchGetPoolRequest } from "../../services/models/matchSchema";
 
 import { handleError } from "../../error";
 import { useNavigate } from "react-router-dom";
+import { useLoading } from "../../context/loadingContext";
 
 export default function SelectBoard() {
   const { itemIndex: questionIndex, movePrev, moveNext } = useHorizonBoard();
@@ -25,6 +25,7 @@ export default function SelectBoard() {
   const [disablePrev, setDisablePrev] = useState(false);
   const [disableNext, setDisableNext] = useState(false);
   const navigator = useNavigate();
+  const { setIsLoading } = useLoading();
   const { data: peerCounts } = useQuery(
     ["getPool"],
     () =>
@@ -54,11 +55,14 @@ export default function SelectBoard() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
+      setIsLoading(true);
       const res = await fetchPostPool(convertAnswer(answerList));
       if (res.status === 200) navigator("/");
       else throw new Error(`요청이 실패했습니다. error code: ${res.status}`);
     } catch (err) {
       handleError(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 

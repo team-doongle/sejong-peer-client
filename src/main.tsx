@@ -6,6 +6,8 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./styles/font.css";
+import { AuthProvider } from "./context/auth";
+import { LoadingProvider } from "./context/loadingContext";
 export const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -14,7 +16,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <QueryClientProvider client={queryClient}>
       <Toaster />
       <BrowserRouter>
-        <App />
+        <LoadingProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </LoadingProvider>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>
