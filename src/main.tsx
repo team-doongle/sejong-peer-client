@@ -6,7 +6,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./styles/font.css";
-import { AuthProvider } from "./context/auth";
+import { AuthProvider } from "./context/authContext";
 import { LoadingProvider } from "./context/loadingContext";
 export const queryClient = new QueryClient();
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useAuth } from "../../context/auth";
+import { useAuth } from "../../context/authContext";
 import { color } from "../../styles/palette";
 
 export default function ButtonLogout() {

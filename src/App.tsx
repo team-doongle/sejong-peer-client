@@ -1,6 +1,6 @@
 import { Navigate, Route } from "react-router";
 import { Routes } from "react-router-dom";
-import { useAuth } from "./context/auth";
+import { useAuth } from "./context/authContext";
 import { queryClient } from "./main";
 import LoginPage from "./pages/login";
 import RootPage from "./pages/root";
