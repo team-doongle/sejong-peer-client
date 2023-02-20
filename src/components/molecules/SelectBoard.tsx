@@ -65,9 +65,11 @@ export default function SelectBoard() {
       setIsLoading(true);
       const res = await fetchPostPool(convertAnswer(answerList));
       if (res.status === 200) {
-        queryClient.invalidateQueries(["state"]);
-        navigator("/");
-        setIsLoading(false);
+        setTimeout(() => {
+          queryClient.invalidateQueries(["state"]);
+          navigator("/");
+          setIsLoading(false);
+        });
       } else throw new Error(`요청이 실패했습니다. error code: ${res.status}`);
     } catch (err) {
       handleError(err);
