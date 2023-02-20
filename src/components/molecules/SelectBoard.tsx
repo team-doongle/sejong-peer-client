@@ -19,6 +19,7 @@ import { handleError } from "../../error";
 import { useNavigate } from "react-router-dom";
 import { useLoading } from "../../context/loadingContext";
 import Margin from "../atoms/Margin";
+import { queryClient } from "../../main";
 
 export default function SelectBoard() {
   const { itemIndex: questionIndex, movePrev, moveNext } = useHorizonBoard();
@@ -63,11 +64,13 @@ export default function SelectBoard() {
       e.preventDefault();
       setIsLoading(true);
       const res = await fetchPostPool(convertAnswer(answerList));
-      if (res.status === 200) navigator("/");
-      else throw new Error(`요청이 실패했습니다. error code: ${res.status}`);
+      if (res.status === 200) {
+        queryClient.invalidateQueries(["state"]);
+        navigator("/");
+        setIsLoading(false);
+      } else throw new Error(`요청이 실패했습니다. error code: ${res.status}`);
     } catch (err) {
       handleError(err);
-    } finally {
       setIsLoading(false);
     }
   };
