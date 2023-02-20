@@ -7,6 +7,7 @@ import Margin from "../components/atoms/Margin";
 import Layout from "../components/Layout";
 import { useLoading } from "../context/loadingContext";
 import { handleError } from "../error";
+import { queryClient } from "../main";
 import { fetchGetUser, fetchPostBreak } from "../services/apis/match";
 
 export default function RootPage() {
@@ -38,14 +39,18 @@ export default function RootPage() {
                   try {
                     setIsLoading(true);
                     const res = await fetchPostBreak();
-                    if (res.status === 200) navigator("/");
-                    else
+                    if (res.status === 200) {
+                      setTimeout(() => {
+                        queryClient.invalidateQueries(["state"]);
+                        navigator("/");
+                        setIsLoading(false);
+                      });
+                    } else
                       throw new Error(
                         `관계 끊기 요청이 실패했습니다.\nerror code: ${res.status}`
                       );
                   } catch (err) {
                     handleError(err);
-                  } finally {
                     setIsLoading(false);
                   }
                 }}
