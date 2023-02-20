@@ -18,6 +18,7 @@ import { useQuery } from "react-query";
 import { handleError } from "../../error";
 import { useNavigate } from "react-router-dom";
 import { useLoading } from "../../context/loadingContext";
+import Margin from "../atoms/Margin";
 
 export default function SelectBoard() {
   const { itemIndex: questionIndex, movePrev, moveNext } = useHorizonBoard();
@@ -111,12 +112,16 @@ export default function SelectBoard() {
         return (
           <>
             <div>
-              {answerList.map((e, key) => (
-                <div style={{ margin: 10 }} key={key}>
-                  {e}
+              {answerList.map((e, i) => (
+                <div key={i} style={{ display: "flex" }}>
+                  <div style={{ margin: 10, width: 100 }}>
+                    {questions[i].name}
+                  </div>
+                  <div style={{ margin: 10 }}>{e}</div>
                 </div>
               ))}
             </div>
+            <Margin size={2} />
             <Button value="제출하기" type="submit" />
           </>
         );
