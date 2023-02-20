@@ -27,7 +27,12 @@ export default function SelectBoard() {
   const navigator = useNavigate();
   const { setIsLoading } = useLoading();
   const { data: peerCounts } = useQuery(
-    ["getPool"],
+    [
+      "getPool",
+      convertGender(answerList[0]),
+      convertPurpose(answerList[1]),
+      convertTargetGender(answerList[2], answerList[0]),
+    ],
     () =>
       fetchGetPool({
         gender: convertGender(answerList[0]),
