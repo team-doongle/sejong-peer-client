@@ -13,6 +13,7 @@ import { fetchGetUser, fetchPostBreak } from "../services/apis/match";
 export default function RootPage() {
   const { data: state } = useQuery(["state"], fetchGetUser, {
     select: ({ data }) => data.state,
+    notifyOnChangeProps: ["data"],
   });
   const { setIsLoading } = useLoading();
   const navigator = useNavigate();
