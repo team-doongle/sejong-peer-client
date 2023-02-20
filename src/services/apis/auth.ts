@@ -10,7 +10,7 @@ export const fetchLogin = (props: FetchLoginRequest) => {
 };
 
 export const fetchLogout = () => {
-  return instance.post("logout");
+  return instance.get("logout");
 };
 
 export const fetchRefreshAuth = () => {
