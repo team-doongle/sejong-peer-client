@@ -45,5 +45,5 @@ function RequireAuth({ children }: { children: JSX.Element }) {
 
 function NoNeedAuth({ children }: { children: JSX.Element }) {
   const { isAuth } = useAuth();
-  return <>{isAuth ? <Navigate to="/select" replace /> : children}</>;
+  return <>{isAuth ? <Navigate to="/" replace /> : children}</>;
 }
