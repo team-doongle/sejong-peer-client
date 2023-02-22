@@ -10,6 +10,7 @@ const matchApi = [
   rest.post(
     `${import.meta.env.VITE_BACKEND_URL}/match/pool`,
     (_req, res, ctx) => {
+      dummy.userRes.state = "ON_GOING";
       return res(ctx.status(200));
     }
   ),
@@ -19,9 +20,10 @@ const matchApi = [
       return res(ctx.json(dummy.userRes));
     }
   ),
-  rest.get(
+  rest.post(
     `${import.meta.env.VITE_BACKEND_URL}/match/break`,
     (_req, res, ctx) => {
+      dummy.userRes.state = "NOT_REGISTER";
       return res(ctx.status(200));
     }
   ),
