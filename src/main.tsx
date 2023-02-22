@@ -8,6 +8,13 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import "./styles/font.css";
 import { AuthProvider } from "./context/authContext";
 import { LoadingProvider } from "./context/loadingContext";
+
+import { worker } from "../mocks/browser";
+
+if (process.env.NODE_ENV === "development") {
+  worker.start();
+}
+
 export const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
