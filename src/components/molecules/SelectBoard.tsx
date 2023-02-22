@@ -1,52 +1,32 @@
 import styled from "styled-components";
-import { fetchGetPool, fetchPostPool } from "../../services/apis/match";
-import {
-  convertAnswer,
-  convertGender,
-  convertPurpose,
-  convertTargetGender,
-  questions,
-} from "../../services/static/questions";
+import { fetchPostPool } from "../../services/apis/match";
+import { convertAnswer, questions } from "../../services/static/questions";
 import HorizonBoard from "../atoms/HorizonBoard";
 import { useEffect, useState } from "react";
 import QuestionCards, { QuestionCardProps } from "../atoms/QuestionCards";
 import { useHorizonBoard } from "../../context/horizonBoardContext";
 import InputBox from "../atoms/InputBox";
 import Button from "../atoms/Button";
-import { useQuery } from "react-query";
-
 import { handleError } from "../../error";
-import { useNavigate } from "react-router-dom";
 import { useLoading } from "../../context/loadingContext";
 import Margin from "../atoms/Margin";
-import { queryClient } from "../../main";
+import {
+  useMatchPoolCounts,
+  useMatchUserState,
+} from "../../services/hooks/matchQueries";
 
 export default function SelectBoard() {
   const { itemIndex: questionIndex, movePrev, moveNext } = useHorizonBoard();
   const [answerList, setAnswerList] = useState<string[]>([]);
   const [disablePrev, setDisablePrev] = useState(false);
   const [disableNext, setDisableNext] = useState(false);
-  const navigator = useNavigate();
   const { setIsLoading } = useLoading();
-  const { data: peerCounts } = useQuery(
-    [
-      "getPool",
-      convertGender(answerList[0]),
-      convertPurpose(answerList[1]),
-      convertTargetGender(answerList[2], answerList[0]),
-    ],
-    () =>
-      fetchGetPool({
-        gender: convertGender(answerList[0]),
-        purpose: convertPurpose(answerList[1]),
-        targetGender: convertTargetGender(answerList[2], answerList[0]),
-      }),
-    {
-      enabled:
-        answerList[0] !== "" && answerList[1] !== "" && answerList[2] !== "",
-      select: ({ data }) => [data.major, data.college, data.all],
-    }
-  );
+  const { userStateRefetch } = useMatchUserState();
+  const { peerCounts } = useMatchPoolCounts({
+    gender: answerList[0],
+    purpose: answerList[1],
+    targetGender: answerList[2],
+  });
 
   const checkReciveAnswer = () =>
     answerList[questionIndex] &&
@@ -65,8 +45,7 @@ export default function SelectBoard() {
       setIsLoading(true);
       const res = await fetchPostPool(convertAnswer(answerList));
       if (res.status === 200) {
-        queryClient.invalidateQueries(["state"]);
-        navigator("/");
+        userStateRefetch();
         setIsLoading(false);
       } else throw new Error(`요청이 실패했습니다. error code: ${res.status}`);
     } catch (err) {

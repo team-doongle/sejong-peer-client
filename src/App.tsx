@@ -1,49 +1,31 @@
 import { Navigate, Route } from "react-router";
 import { Routes } from "react-router-dom";
 import { useAuth } from "./context/authContext";
+import ErrorPage from "./pages/error";
 import LoginPage from "./pages/login";
 import RootPage from "./pages/root";
 import SelectPage from "./pages/select";
 
 function App() {
+  const { isAuth } = useAuth();
+
   return (
     <Routes>
       <Route
         path="/"
-        element={
-          <RequireAuth>
-            <RootPage />
-          </RequireAuth>
-        }
+        element={isAuth ? <RootPage /> : <Navigate to={"/login"} replace />}
       />
       <Route
         path="/login"
-        element={
-          <NoNeedAuth>
-            <LoginPage />
-          </NoNeedAuth>
-        }
+        element={!isAuth ? <LoginPage /> : <Navigate to={"/"} replace />}
       />
       <Route
         path="/select"
-        element={
-          <RequireAuth>
-            <SelectPage />
-          </RequireAuth>
-        }
+        element={isAuth ? <SelectPage /> : <Navigate to={"/login"} replace />}
       />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
 
 export default App;
-
-function RequireAuth({ children }: { children: JSX.Element }) {
-  const { isAuth } = useAuth();
-  return <>{isAuth ? children : <Navigate to="/login" replace />}</>;
-}
-
-function NoNeedAuth({ children }: { children: JSX.Element }) {
-  const { isAuth } = useAuth();
-  return <>{isAuth ? <Navigate to="/" replace /> : children}</>;
-}
