@@ -12,7 +12,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 export default Layout;
 
 const StyledContainer = styled.div`
-  height: 100vh;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,5 +21,5 @@ const StyledContainer = styled.div`
 
 const StyledWrapper = styled.div`
   width: 400px;
-  height: 80vh;
+  height: 60vh;
 `;
