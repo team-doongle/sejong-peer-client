@@ -1,13 +1,13 @@
 import { useLoading } from "../../context/loadingContext";
 import { handleError } from "../../error";
 import { fetchPostBreak } from "../../services/apis/match";
-import { useMatchUserState } from "../../services/hooks/matchQueries";
+import { useMatchUser } from "../../services/hooks/matchQueries";
 import Button from "../atoms/Button";
 import Margin from "../atoms/Margin";
 
 export default function StateDone() {
   const { setIsLoading } = useLoading();
-  const { userStateRefetch } = useMatchUserState();
+  const { userStateRefetch } = useMatchUser();
   return (
     <>
       <div style={{ textAlign: "center", lineHeight: "24px" }}>

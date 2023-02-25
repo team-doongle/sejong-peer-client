@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { fetchPostPool } from "../../services/apis/match";
-import { convertAnswer, questions } from "../../services/static/questions";
+import { questions } from "../../services/static/questions";
 import HorizonBoard from "../atoms/HorizonBoard";
 import { useEffect, useState } from "react";
 import QuestionCards, { QuestionCardProps } from "../atoms/QuestionCards";
@@ -11,21 +10,26 @@ import { handleError } from "../../error";
 import { useLoading } from "../../context/loadingContext";
 import Margin from "../atoms/Margin";
 import {
+  registerPool,
   useMatchPoolCounts,
-  useMatchUserState,
+  useMatchUser,
 } from "../../services/hooks/matchQueries";
 
 export default function SelectBoard() {
   const { itemIndex: questionIndex, movePrev, moveNext } = useHorizonBoard();
-  const [answerList, setAnswerList] = useState<string[]>([]);
+  const [answerList, setAnswerList] = useState<string[]>(
+    questions.map(() => "")
+  );
   const [disablePrev, setDisablePrev] = useState(false);
   const [disableNext, setDisableNext] = useState(false);
   const { setIsLoading } = useLoading();
-  const { userStateRefetch } = useMatchUserState();
+  const { user, userStateRefetch } = useMatchUser();
   const { peerCounts } = useMatchPoolCounts({
     gender: answerList[0],
     purpose: answerList[1],
     targetGender: answerList[2],
+    gradeLimit: answerList[3],
+    studentNumberLimit: answerList[4],
   });
 
   const checkReciveAnswer = () =>
@@ -43,7 +47,30 @@ export default function SelectBoard() {
     try {
       e.preventDefault();
       setIsLoading(true);
-      const res = await fetchPostPool(convertAnswer(answerList));
+
+      const [
+        gender,
+        purpose,
+        targetGender,
+        gradeLimit,
+        studentNumberLimit,
+        targetBoundary,
+        phoneNumber,
+      ] = answerList;
+
+      if (!user) throw new Error("no user info");
+
+      const res = await registerPool({
+        gender,
+        purpose,
+        targetGender,
+        gradeLimit,
+        studentNumberLimit,
+        targetBoundary,
+        phoneNumber,
+        user,
+      });
+
       if (res.status === 200) {
         userStateRefetch();
         setIsLoading(false);
@@ -54,10 +81,19 @@ export default function SelectBoard() {
     }
   };
 
-  const SelectComponents = questions.map(({ choices, type }) => {
+  const SelectComponents = questions.map(({ choices, type, name }) => {
     switch (type) {
       case "select":
         return <QuestionCards choices={choices} handleChoice={handleChoice} />;
+      case "range":
+        return (
+          <InputBox
+            type="number"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (e.target.value.length === 1) handleChoice(e.target.value);
+            }}
+          />
+        );
       case "select-with-describe":
         return (
           <QuestionCards
@@ -162,6 +198,7 @@ const StyledTitle = styled.h2`
   text-align: center;
   box-sizing: border-box;
   padding: 1rem 0;
+  white-space: pre-line;
 `;
 
 const StyledButton = styled.button`
