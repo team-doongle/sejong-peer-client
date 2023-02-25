@@ -33,5 +33,5 @@ export default matchApi;
 
 const dummy = {
   poolRes: { major: 0, college: 2, all: 99 },
-  userRes: { state: "NOT_REGISTER" },
+  userRes: { state: "NOT_REGISTER", grade: "2", studentNumber: "18" },
 };
