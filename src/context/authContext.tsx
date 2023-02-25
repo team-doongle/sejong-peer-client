@@ -26,7 +26,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(true);
       const res = await fetchLogin(props);
       const token = res.data.accessToken;
-      if (!token) throw new Error("no token");
+      if (!token)
+        throw new Error(
+          "인증에 실패했습니다.\n 세종대학교 학사포털의\n아이디와 비밀번호를 입력해주세요."
+        );
       storage.set("ACCESS_TOKEN", token);
       setIsAuth(true);
       navigator("/");
@@ -55,16 +58,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const res = await fetchRefreshAuth();
       const token = res.data.accessToken;
-      if (!token) throw new Error("no token");
+      if (!token)
+        throw new Error("인증에 실패했습니다.\n 다시 로그인 해주세요.");
       storage.set("ACCESS_TOKEN", token);
       setIsAuth(true);
     } catch (err) {
+      handleError(err);
       navigator("/login");
     }
   };
 
   useEffect(() => {
-    refreshAuth();
+    if (window.location.pathname !== "/login") refreshAuth();
   }, []);
 
   return (
