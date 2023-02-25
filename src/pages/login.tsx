@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import MainLogo from "../components/atoms/MainLogo";
 import LoginForm from "../components/molecules/LoginForm";
 
 export default function LoginPage() {
@@ -6,7 +7,7 @@ export default function LoginPage() {
     <>
       <StyledContainer>
         <StyledWrapper>
-          <img src="/assets/character/main.png" alt="main character" />
+          <MainLogo />
           <StyledTitle>Sejong Peer !</StyledTitle>
           <LoginForm />
         </StyledWrapper>
