@@ -4,7 +4,6 @@ import { useAuth } from "./context/authContext";
 import ErrorPage from "./pages/error";
 import LoginPage from "./pages/login";
 import RootPage from "./pages/root";
-import SelectPage from "./pages/select";
 
 function App() {
   const { isAuth } = useAuth();
@@ -18,10 +17,6 @@ function App() {
       <Route
         path="/login"
         element={!isAuth ? <LoginPage /> : <Navigate to={"/"} replace />}
-      />
-      <Route
-        path="/select"
-        element={isAuth ? <SelectPage /> : <Navigate to={"/login"} replace />}
       />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
