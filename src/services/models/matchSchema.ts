@@ -3,12 +3,20 @@ export const purposeConstArray = ["GET_SENIOR", "GET_JUNIOR"] as const;
 export const targetGenderConstArray = ["MALE", "FEMALE", "ALL"] as const;
 export const targetBoundaryConstArray = ["MAJOR", "COLLEGE", "ALL"] as const;
 
+type Gender = typeof genderConstArray[number];
+type Purpose = typeof purposeConstArray[number];
+type TargetGender = typeof targetGenderConstArray[number];
+type GradeLimit = number;
+type StudentNumberLimit = number;
+type TargetBoundary = typeof targetBoundaryConstArray[number];
+type PhoneNumber = string;
+
 export type FetchGetPoolRequest = {
-  gender: typeof genderConstArray[number];
-  purpose: typeof purposeConstArray[number];
-  targetGender: typeof targetGenderConstArray[number];
-  gradeLimit: string;
-  studentNumberLimit: string;
+  gender: Gender;
+  purpose: Purpose;
+  targetGender: TargetGender;
+  gradeLimit: GradeLimit;
+  studentNumberLimit: StudentNumberLimit;
 };
 
 export type FetchGetPoolResponse = {
@@ -18,13 +26,13 @@ export type FetchGetPoolResponse = {
 };
 
 export type FetchPostPoolRequest = {
-  gender: typeof genderConstArray[number];
-  purpose: typeof purposeConstArray[number];
-  targetGender: typeof targetGenderConstArray[number];
-  gradeLimit: string;
-  studentNumberLimit: string;
-  targetBoundary: typeof targetBoundaryConstArray[number];
-  phoneNumber: string;
+  gender: Gender;
+  purpose: Purpose;
+  targetGender: TargetGender;
+  gradeLimit: GradeLimit;
+  studentNumberLimit: StudentNumberLimit;
+  targetBoundary: TargetBoundary;
+  phoneNumber: PhoneNumber;
 };
 
 export function constTypeCheck(constArray: any, value: any) {

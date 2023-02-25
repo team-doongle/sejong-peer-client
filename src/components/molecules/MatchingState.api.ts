@@ -125,7 +125,7 @@ const convertGradeLimit = (
   choice: string,
   grade: string
 ): FetchPostPoolRequest["gradeLimit"] => {
-  return Math.abs(Number(choice)) + "";
+  return Math.abs(Number(choice));
   // TODO: 타켓 학년 선택시 숫자로 바꿔주는 로직으로 변경하기
   // return Math.abs(Number(choice) - Number(grade)) + "";
 };
@@ -134,7 +134,7 @@ const convertStudentNumberLimit = (
   choice: string,
   studentNumber: string
 ): FetchPostPoolRequest["studentNumberLimit"] => {
-  return Math.abs(Number(choice)) + "";
+  return Math.abs(Number(choice));
   // TODO: 타켓 학번 선택시 숫자로 바꿔주는 로직으로 변경하기
   // return Math.abs(Number(choice) - Number(studentNumber)) + "";
 };
