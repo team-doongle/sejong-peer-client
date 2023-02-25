@@ -6,11 +6,11 @@ import {
   useEffect,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleError } from "../error";
+import { handleError } from "../utils/handleError";
 import { fetchLogin, fetchLogout } from "../services/apis/auth";
 import { fetchRefreshAuth } from "../services/apis/auth";
 import { FetchLoginRequest } from "../services/models/authSchema";
-import { storage } from "../storage";
+import { storage } from "../utils/storage";
 import { useLoading } from "./loadingContext";
 
 export type AuthContextProps = {

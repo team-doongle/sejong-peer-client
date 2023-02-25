@@ -1,5 +1,5 @@
 import { useLoading } from "../../context/loadingContext";
-import { handleError } from "../../error";
+import { handleError } from "../../utils/handleError";
 import { fetchPostBreak } from "../../services/apis/match";
 import Button from "../atoms/Button";
 import Margin from "../atoms/Margin";

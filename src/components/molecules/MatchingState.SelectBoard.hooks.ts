@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHorizonBoard } from "../../context/horizonBoardContext";
 import { useLoading } from "../../context/loadingContext";
-import { handleError } from "../../error";
+import { handleError } from "../../utils/handleError";
 import {
   registerPool,
   useMatchPoolCounts,
