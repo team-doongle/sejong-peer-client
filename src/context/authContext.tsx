@@ -9,9 +9,16 @@ import { useNavigate } from "react-router-dom";
 import { handleError } from "../error";
 import { fetchLogin, fetchLogout } from "../services/apis/auth";
 import { fetchRefreshAuth } from "../services/apis/auth";
+import { FetchLoginRequest } from "../services/models/authSchema";
 import { storage } from "../storage";
-import { AuthContextProps } from "../types/auth";
 import { useLoading } from "./loadingContext";
+
+export type AuthContextProps = {
+  isAuth: boolean;
+  login: (props: FetchLoginRequest) => void;
+  logout: VoidFunction;
+  refreshAuth: VoidFunction;
+};
 
 const AuthContext = createContext<AuthContextProps>(null!);
 
