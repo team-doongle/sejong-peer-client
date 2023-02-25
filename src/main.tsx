@@ -17,6 +17,12 @@ if (process.env.NODE_ENV === "development") {
 
 export const queryClient = new QueryClient();
 
+window.onload = () => {
+  setTimeout(() => {
+    window.scrollTo(0, 1);
+  }, 0);
+};
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <GlobalStyles />
