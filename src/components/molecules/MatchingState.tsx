@@ -1,7 +1,7 @@
 import { HorizonBoardProvider } from "../../context/horizonBoardContext";
 import { useMatchUser } from "../../services/hooks/matchQueries";
-import SelectBoard from "./SelectBoard";
-import StateDone from "./StateDone";
+import SelectBoard from "./MatchingState.SelectBoard";
+import StateDone from "./MatchingState.StateDone";
 
 export default function MatchingState() {
   const { user } = useMatchUser();

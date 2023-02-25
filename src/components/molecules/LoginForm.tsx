@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { useAuth } from "../../context/authContext";
-import useInput from "../../hooks/useInput";
+import * as S from "./LoginForm.styles";
 import ButtonLogin from "../atoms/ButtonLogin";
 import InputBox from "../atoms/InputBox";
+import useInput from "../../hooks/useInput";
+import { useAuth } from "../../context/authContext";
 
-const LoginForm = () => {
+export default function LoginForm() {
   const { input: id, onChange: onChangeId } = useInput("");
   const { input: password, onChange: onChangePassword } = useInput("");
   const { login } = useAuth();
@@ -16,9 +16,9 @@ const LoginForm = () => {
 
   return (
     <>
-      <StyledForm onSubmit={handleSubmit}>
-        <StyledContainer>
-          <StyledWrapper>
+      <S.Form onSubmit={handleSubmit}>
+        <S.Container>
+          <S.Wrapper>
             <InputBox
               placeholder={"아이디"}
               value={id}
@@ -32,30 +32,10 @@ const LoginForm = () => {
               type="password"
               required
             />
-          </StyledWrapper>
+          </S.Wrapper>
           <ButtonLogin value={"로그인"} type={"submit"} />
-        </StyledContainer>
-      </StyledForm>
+        </S.Container>
+      </S.Form>
     </>
   );
-};
-
-export default LoginForm;
-
-const StyledForm = styled.form`
-  & > input {
-    margin-bottom: 16px;
-  }
-`;
-
-const StyledContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledWrapper = styled.div`
-  margin-right: 16px;
-  & > input:first-child {
-    margin-bottom: 16px;
-  }
-`;
+}

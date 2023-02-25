@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ButtonLogout from "../components/atoms/ButtonLogout";
-import Layout from "../components/Layout";
+import Layout from "../components/atoms/Layout";
 import MatchingState from "../components/molecules/MatchingState";
 
 export default function RootPage() {
