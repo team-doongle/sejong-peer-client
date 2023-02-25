@@ -15,6 +15,15 @@ if (process.env.NODE_ENV === "development") {
   worker.start();
 }
 
+// 전체 화면 모드로 설정
+if (window.navigator.hasOwnProperty("standalone")) {
+  // iOS에서는 "standalone" 속성이 사용됩니다.
+  document.documentElement.requestFullscreen();
+} else {
+  // 안드로이드에서는 "fullscreen" 속성이 사용됩니다.
+  document.documentElement.requestFullscreen({ navigationUI: "hide" });
+}
+
 export const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
