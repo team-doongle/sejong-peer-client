@@ -1,14 +1,10 @@
-import { QuestionProps } from "../models/questionShecma";
-import {
-  FetchPostPoolRequest,
-  constTypeCheck,
-  genderConstArray,
-  purposeConstArray,
-  targetGenderConstArray,
-  targetBoundaryConstArray,
-} from "../../services/models/matchSchema";
-
-export const questions: QuestionProps[] = [
+export const questions: {
+  title: string;
+  name?: string;
+  choices: string[];
+  type: "select" | "input" | "submit" | "select-with-describe" | "range";
+  imageSrc: string;
+}[] = [
   {
     title: "학우님의 성별을 선택해주세요.",
     name: "본인 성별",
