@@ -21,5 +21,4 @@ const StyledContainer = styled.div`
 
 const StyledWrapper = styled.div`
   width: 400px;
-  height: 60vh;
 `;
