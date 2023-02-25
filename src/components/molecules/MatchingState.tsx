@@ -1,7 +1,8 @@
 import { HorizonBoardProvider } from "../../context/horizonBoardContext";
-import { useMatchUser } from "../../services/hooks/matchQueries";
+import { useMatchUser } from "./MatchingState.api";
 import SelectBoard from "./MatchingState.SelectBoard";
-import StateDone from "./MatchingState.StateDone";
+import StateDone from "./MatchingState.Done";
+import StateOnGoing from "./MatchingState.OnGoing";
 
 export default function MatchingState() {
   const { user } = useMatchUser();
@@ -13,7 +14,7 @@ export default function MatchingState() {
           <SelectBoard />
         </HorizonBoardProvider>
       ) : user?.state === "ON_GOING" ? (
-        <div>구하고있슴둥</div>
+        <StateOnGoing />
       ) : user?.state === "DONE" ? (
         <StateDone />
       ) : (

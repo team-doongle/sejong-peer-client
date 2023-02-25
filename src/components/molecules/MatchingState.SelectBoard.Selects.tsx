@@ -21,9 +21,11 @@ export default function SelectComponents({
         return (
           <InputBox
             type="number"
+            placeholder="[예시] 2 입력 시 (본인 학번/학년 ± 2)를 범위로 탐색"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               if (e.target.value.length === 1) handleChoice(e.target.value);
             }}
+            style={{ width: "80%" }}
           />
         );
       case "select-with-describe":

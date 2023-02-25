@@ -27,16 +27,14 @@ export const questions: {
     imageSrc: "/assets/character/4.jpg",
   },
   {
-    title:
-      "짝의 학년 범위를 설정해주세요.\n*본인학년이 1학년일 때\n선택 범위 2 선택시 최대 3학년과 매칭",
+    title: "짝의 학년 범위(1~4)를 설정해주세요.",
     name: "짝 학년 범위",
     choices: [],
     type: "range",
     imageSrc: "/assets/character/5.jpg",
   },
   {
-    title:
-      "짝의 학번 범위를 설정해주세요.\n*본인학번이 23학번일 때\n선택 범위 2 선택시 최대 21학번과 매칭",
+    title: "짝의 학번 범위(1~9)를 설정해주세요.",
     name: "짝 학번 범위",
     choices: [],
     type: "range",

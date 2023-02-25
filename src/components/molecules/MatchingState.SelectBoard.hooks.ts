@@ -6,7 +6,7 @@ import {
   registerPool,
   useMatchPoolCounts,
   useMatchUser,
-} from "../../services/hooks/matchQueries";
+} from "./MatchingState.api";
 import { QuestionCardProps } from "../atoms/QuestionCards";
 import { questions } from "./MatchingState.SelectBoard.questions";
 
