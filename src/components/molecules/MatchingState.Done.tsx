@@ -3,7 +3,7 @@ import { handleError } from "../../error";
 import { fetchPostBreak } from "../../services/apis/match";
 import Button from "../atoms/Button";
 import Margin from "../atoms/Margin";
-import { useMatchUser } from "./MatchingState.api";
+import { useMatchUser } from "./MatchingState.SelectBoard.api";
 
 export default function StateDone() {
   const { setIsLoading } = useLoading();

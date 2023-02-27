@@ -19,14 +19,34 @@ export default function SelectComponents({
         return <QuestionCards choices={choices} handleChoice={handleChoice} />;
       case "range":
         return (
-          <InputBox
-            type="number"
-            placeholder="[예시] 2 입력 시 (본인 학번/학년 ± 2)를 범위로 탐색"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              if (e.target.value.length === 1) handleChoice(e.target.value);
+          <select
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              handleChoice(e.target.value);
             }}
-            style={{ width: "80%" }}
-          />
+          >
+            {name === "짝 학년 범위" ? (
+              <>
+                <option disabled selected>
+                  선택해주세요
+                </option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>상관없음</option>
+              </>
+            ) : (
+              <>
+                <option disabled selected>
+                  선택해주세요
+                </option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>상관없음</option>
+              </>
+            )}
+          </select>
         );
       case "select-with-describe":
         return (
