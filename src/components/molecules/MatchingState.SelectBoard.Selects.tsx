@@ -75,8 +75,14 @@ export default function SelectComponents({
             type="tel"
             name="phone"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              if (e.target.value.length === 11) handleChoice(e.target.value);
+              const onlyNumbers = e.target.value.replace(/[^0-9]/g, "");
+              e.target.value = onlyNumbers;
+              if (e.target.value.length === 11) {
+                e.target.blur();
+                handleChoice(e.target.value);
+              }
             }}
+            maxlength="11"
             style={{ width: "80%" }}
           />
         );
