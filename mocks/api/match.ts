@@ -33,5 +33,16 @@ export default matchApi;
 
 const dummy = {
   poolRes: { major: 0, college: 2, all: 99 },
-  userRes: { state: "NOT_REGISTER", grade: "2", studentNumber: "18" },
+  userRes: {
+    state: "NOT_REGISTER",
+    grade: "2",
+    studentNumber: "18",
+    gender: "MALE",
+    purpose: "GET_JUNIOR",
+    targetGender: "ALL",
+    gradeLimit: 2,
+    studentNumberLimit: 99,
+    targetBoundary: "major",
+    phoneNumber: "01012341234",
+  },
 };

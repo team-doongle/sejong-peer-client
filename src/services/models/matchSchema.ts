@@ -48,4 +48,11 @@ export type FetchGetUserResponse = {
   state: "NOT_REGISTER" | "ON_GOING" | "DONE";
   grade: string;
   studentNumber: string;
+  gender: Gender;
+  purpose: Purpose;
+  targetGender: TargetGender;
+  gradeLimit: GradeLimit;
+  studentNumberLimit: StudentNumberLimit;
+  targetBoundary: TargetBoundary;
+  phoneNumber: PhoneNumber;
 };
