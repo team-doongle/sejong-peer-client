@@ -1,5 +1,5 @@
 import { HorizonBoardProvider } from "../../context/horizonBoardContext";
-import { useMatchUser } from "./MatchingState.api";
+import { useMatchUser } from "./MatchingState.SelectBoard.api";
 import SelectBoard from "./MatchingState.SelectBoard";
 import StateDone from "./MatchingState.Done";
 import StateOnGoing from "./MatchingState.OnGoing";
