@@ -63,7 +63,6 @@ export default function useSelectBoard() {
         studentNumberLimit,
         targetBoundary,
         phoneNumber,
-        user,
       });
 
       if (res.status === 200) {
