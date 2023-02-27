@@ -81,7 +81,6 @@ export const registerPool = async ({
   studentNumberLimit: string;
   targetBoundary: string;
   phoneNumber: string;
-  user: { studentNumber: string; grade: string; state: string };
 }) => {
   return fetchPostPool({
     gender: convertData.gender(gender),
