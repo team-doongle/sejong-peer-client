@@ -24,28 +24,14 @@ export default function SelectComponents({
               handleChoice(e.target.value);
             }}
           >
-            {name === "짝 학년 범위" ? (
-              <>
-                <option disabled selected>
-                  선택해주세요
-                </option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>상관없음</option>
-              </>
-            ) : (
-              <>
-                <option disabled selected>
-                  선택해주세요
-                </option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>상관없음</option>
-              </>
-            )}
+            <option disabled selected>
+              선택해주세요
+            </option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>상관없음</option>
           </select>
         );
       case "select-with-describe":
