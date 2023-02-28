@@ -92,13 +92,14 @@ export default function SelectComponents({
             <div>
               {answerList.map((e, i) => (
                 <div key={i} style={{ display: "flex" }}>
-                  <div style={{ margin: 10, width: 160 }}>
+                  <div style={{ margin: 10, width: 100 }}>
                     {questions[i].name}
                   </div>
                   <div style={{ margin: 10 }}>{e}</div>
                 </div>
               ))}
             </div>
+            <Margin size={2} />
             <Button value="제출하기" type="submit" />
           </>
         );

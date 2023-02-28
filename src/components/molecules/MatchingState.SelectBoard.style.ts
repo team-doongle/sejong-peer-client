@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const QuestionCounter = styled.div`
+  margin-top: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +20,7 @@ export const Title = styled.h2`
   width: 100%;
   text-align: center;
   box-sizing: border-box;
-  padding-top: 1rem;
+  padding: 1rem 0;
   white-space: pre-line;
 `;
 

@@ -5,7 +5,7 @@ import { fetchPostBreak } from "../../services/apis/match";
 import Button from "../atoms/Button";
 import Margin from "../atoms/Margin";
 import { useMatchUser } from "./MatchingState.SelectBoard.api";
-import CurrentState from "./MatchingState.CurrentState";
+import CurrentState from "./MatcingState.CurrentState";
 
 export default function StateOnGoing() {
   const { setIsLoading } = useLoading();
