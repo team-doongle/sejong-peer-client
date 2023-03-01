@@ -128,9 +128,9 @@ const convertData = {
     targetBoundary: string
   ): FetchPostPoolRequest["targetBoundary"] => {
     const converted =
-      targetBoundary === "우리 학과 선베"
+      targetBoundary === "나와 같은 학과"
         ? "MAJOR"
-        : targetBoundary === "우리 단과대 선배"
+        : targetBoundary === "나와 같은 단과대"
         ? "COLLEGE"
         : "ALL";
     constTypeCheck(targetBoundaryConstArray, converted);
