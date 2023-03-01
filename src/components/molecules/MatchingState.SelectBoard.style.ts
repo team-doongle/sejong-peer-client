@@ -4,6 +4,7 @@ export const QuestionCounter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px;
 `;
 
 export const ImageContainer = styled.div`
@@ -19,7 +20,7 @@ export const Title = styled.h2`
   width: 100%;
   text-align: center;
   box-sizing: border-box;
-  padding-top: 1rem;
+  padding: 15px;
   white-space: pre-line;
 `;
 

@@ -11,7 +11,9 @@ export default function StateDone() {
   const { userStateRefetch } = useMatchUser();
   return (
     <>
-      <div style={{ textAlign: "center", lineHeight: "24px" }}>
+      <div
+        style={{ textAlign: "center", lineHeight: "24px", marginTop: "15px" }}
+      >
         짝을 구했습니다! <br />
         문자메시지를 확인해주세요.
       </div>

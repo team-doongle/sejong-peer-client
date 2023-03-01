@@ -19,7 +19,6 @@ const StyledButton = styled.button`
   height: 32px;
   border: 0px;
   font-size: 12px;
-  margin-bottom: 16px;
   margin-left: 32px;
   background-color: white;
   background-repeat: no-repeat;

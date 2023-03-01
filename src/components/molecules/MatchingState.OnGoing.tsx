@@ -12,7 +12,9 @@ export default function StateOnGoing() {
   const { userStateRefetch } = useMatchUser();
   return (
     <>
-      <div style={{ textAlign: "center", lineHeight: "24px" }}>
+      <div
+        style={{ textAlign: "center", lineHeight: "24px", marginTop: "15px" }}
+      >
         짝을 구하는 중입니다.
       </div>
       <CurrentState />

@@ -54,8 +54,11 @@ export default function CurrentState() {
 const StyledFlex = styled.div`
   display: flex;
   & div {
-    margin: 10px;
-    width: 100px;
+    margin-bottom: 15px;
+  }
+  & div:first-child {
+    margin: 0 10px;
+    width: 160px;
   }
 
   &:first-child {
