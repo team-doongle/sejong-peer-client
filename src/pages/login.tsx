@@ -1,3 +1,4 @@
+import ReleaseNotes from "components/atoms/ReleaseNotes";
 import styled from "styled-components";
 import MainLogo from "../components/atoms/MainLogo";
 import LoginForm from "../components/molecules/LoginForm";
@@ -7,6 +8,7 @@ export default function LoginPage() {
     <>
       <StyledContainer>
         <StyledWrapper>
+          <ReleaseNotes />
           <MainLogo />
           <StyledTitle>Sejong Peer !</StyledTitle>
           <LoginForm />
