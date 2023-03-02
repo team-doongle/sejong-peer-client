@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function HorizonBoard({
   itemComponents,
   itemIndex,
-  itemWidth = 400,
+  itemWidth = 356,
 }: {
   itemComponents: ReactNode[];
   itemIndex: number;
@@ -38,7 +38,7 @@ const StyledContainer = styled.div<{ itemWidth: number }>`
 const StyledWrapper = styled.div<{ transitionX: number }>`
   display: flex;
   align-items: center;
-  width: 400px;
+  width: 356px;
   transform: translate(
     ${({ transitionX }: { transitionX: number }) => -transitionX}px
   );

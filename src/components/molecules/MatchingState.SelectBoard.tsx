@@ -19,10 +19,16 @@ export default function SelectBoard() {
 
   return (
     <>
-      <S.ImageContainer>
-        <img src={questions[itemIndex].imageSrc} alt="charater" />
-      </S.ImageContainer>
-      <S.Title>{questions[itemIndex].title}</S.Title>
+      <div className="flex justify-center">
+        <img
+          src={questions[itemIndex].imageSrc}
+          alt="charater"
+          className="w-36 h-36"
+        />
+      </div>
+      <h2 className="w-full text-center text-xl p-4">
+        {questions[itemIndex].title}
+      </h2>
       <form onSubmit={handleSubmit}>
         <HorizonBoard
           itemComponents={SelectComponents({
@@ -33,11 +39,11 @@ export default function SelectBoard() {
           itemIndex={itemIndex}
         />
       </form>
-      <S.QuestionCounter>
+      <div className="flex justify-center items-center p-4 text-xl">
         <S.ButtonLeft onClick={movePrev} disabled={disablePrev} />
         {itemIndex + 1} / {questions.length}
         <S.ButtonRight onClick={moveNext} disabled={disableNext} />
-      </S.QuestionCounter>
+      </div>
     </>
   );
 }

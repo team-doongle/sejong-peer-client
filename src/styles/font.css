@@ -2,3 +2,13 @@
   font-family: "Noto Sans KR";
   src: url("/assets/fonts/NotoSansKR-Regular.otf");
 }
+
+@font-face {
+  font-family: "NanumGothic";
+  src: url("/assets/fonts/NanumGothic-Regular.ttf");
+}
+
+@font-face {
+  font-family: "KoPubWorld-Dotum";
+  src: url("/assets/fonts/KoPubWorld-Dotum-Medium.ttf");
+}

@@ -68,20 +68,18 @@ export default function SelectComponents({
               }
             }}
             maxlength="11"
-            style={{ width: "80%" }}
+            className="w-4/5"
           />
         );
       case "submit":
         return (
           <>
-            <div>
+            <div className="grid gap-4 grid-cols-2 w-4/5">
               {answerList.map((e, i) => (
-                <div key={i} style={{ display: "flex" }}>
-                  <div style={{ margin: 10, width: 168 }}>
-                    {questions[i].name}
-                  </div>
-                  <div style={{ margin: 10 }}>{e}</div>
-                </div>
+                <>
+                  <div>{questions[i].name}</div>
+                  <div>{e}</div>
+                </>
               ))}
             </div>
             <Button value="제출하기" type="submit" />

@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+body {
+  font-family: "KoPubWorld-Dotum";
+}
+select {
+  border-bottom: 1px solid black;
+}

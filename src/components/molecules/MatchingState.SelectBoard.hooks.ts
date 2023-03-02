@@ -13,8 +13,6 @@ import { MatchingBoardIndexState } from "store/horizonBoard";
 
 export default function useSelectBoard() {
   const [itemIndex, setItemIndex] = useRecoilState(MatchingBoardIndexState);
-  const movePrev = () => setItemIndex(itemIndex - 1);
-  const moveNext = () => setItemIndex(itemIndex + 1);
   const [answerList, setAnswerList] = useState<string[]>(
     questions.map(() => "")
   );
@@ -22,6 +20,7 @@ export default function useSelectBoard() {
   const [disableNext, setDisableNext] = useState(false);
   const setIsLoading = useSetRecoilState(isLoadingState);
   const { user, userStateRefetch } = useMatchUser();
+
   const { peerCounts } = useMatchPoolCounts({
     gender: answerList[0],
     purpose: answerList[1],
@@ -29,6 +28,9 @@ export default function useSelectBoard() {
     gradeLimit: answerList[3],
     studentNumberLimit: answerList[4],
   });
+
+  const movePrev = () => setItemIndex(itemIndex - 1);
+  const moveNext = () => setItemIndex(itemIndex + 1);
 
   const checkReciveAnswer = () =>
     answerList[itemIndex] &&

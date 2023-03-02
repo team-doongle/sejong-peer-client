@@ -1,29 +1,5 @@
 import styled from "styled-components";
 
-export const QuestionCounter = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-`;
-
-export const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  & > img {
-    width: 108px;
-    height: 108px;
-  }
-`;
-
-export const Title = styled.h2`
-  width: 100%;
-  text-align: center;
-  box-sizing: border-box;
-  padding: 15px;
-  white-space: pre-line;
-`;
-
 export const Button = styled.button`
   width: 50px;
   height: 20px;

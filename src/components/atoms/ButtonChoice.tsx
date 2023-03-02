@@ -36,8 +36,6 @@ export default function ButtonChoice({
 }
 
 const StyledButton = styled.button`
-  display: inline-flex;
-  flex-direction: column;
   font-size: 16px;
   user-select: none;
   width: 160px;
@@ -46,7 +44,6 @@ const StyledButton = styled.button`
   padding: 14px;
   border: 0;
   border-radius: 10px;
-  text-align: left;
 
   box-shadow: 1px 1px 3px gray;
   ${({ isSelected }: { isSelected?: boolean }) =>
@@ -66,13 +63,15 @@ const StyledButton = styled.button`
     cursor: default;
   }
   & > div {
-    margin-top: 8px;
+    font-weight: normal;
     font-size: 12px;
     color: ${({ isSelected }: { isSelected?: boolean }) =>
       isSelected ? color.gray6 : color.gray3};
+    margin-top: 4px;
   }
   & span {
     color: ${({ isSelected }: { isSelected?: boolean }) =>
       isSelected ? color.gray5 : color.gray2};
+    font-weight: bold;
   }
 `;
