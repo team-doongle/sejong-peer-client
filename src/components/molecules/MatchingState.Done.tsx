@@ -6,12 +6,14 @@ import { useMatchUser } from "./MatchingState.SelectBoard.api";
 import CurrentState from "./MatchingState.CurrentState";
 import { useSetRecoilState } from "recoil";
 import { isLoadingState } from "store/global";
+import Celebration from "components/atoms/Celebration";
 
 export default function StateDone() {
   const setIsLoading = useSetRecoilState(isLoadingState);
   const { userStateRefetch } = useMatchUser();
   return (
     <>
+      <Celebration />
       <img
         src={"./assets/character/done.png"}
         alt="charater"
