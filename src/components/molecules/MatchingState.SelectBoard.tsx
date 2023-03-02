@@ -19,13 +19,11 @@ export default function SelectBoard() {
 
   return (
     <>
-      <div className="flex justify-center">
-        <img
-          src={questions[itemIndex].imageSrc}
-          alt="charater"
-          className="w-36 h-36"
-        />
-      </div>
+      <img
+        src={questions[itemIndex].imageSrc}
+        alt="charater"
+        className="w-36 h-36"
+      />
       <h2 className="w-full text-center text-xl p-4">
         {questions[itemIndex].title}
       </h2>

@@ -12,12 +12,13 @@ export default function StateDone() {
   const { userStateRefetch } = useMatchUser();
   return (
     <>
-      <div
-        style={{ textAlign: "center", lineHeight: "24px", marginTop: "15px" }}
-      >
-        짝을 구했습니다! <br />
-        문자메시지를 확인해주세요.
-      </div>
+      <img
+        src={"./assets/character/done.png"}
+        alt="charater"
+        className="w-36 h-36"
+      />
+      <h2 className="text-lg">짝을 구했습니다 !</h2>
+      <p className="mb-10">문자메시지를 확인해주세요</p>
       <CurrentState />
       <Margin size={3} />
       <Button

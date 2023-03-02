@@ -1,6 +1,5 @@
 import * as S from "./LoginForm.styles";
 import ButtonLogin from "../atoms/ButtonLogin";
-import InputBox from "../atoms/InputBox";
 import useInput from "hooks/useInput";
 import useLogin from "./LoginForm.hooks";
 
@@ -19,13 +18,13 @@ export default function LoginForm() {
       <S.Form onSubmit={handleSubmit}>
         <S.Container>
           <S.Wrapper>
-            <InputBox
+            <input
               placeholder={"아이디"}
               value={id}
               onChange={onChangeId}
               required
             />
-            <InputBox
+            <input
               placeholder={"비밀번호"}
               value={password}
               onChange={onChangePassword}

@@ -1,5 +1,4 @@
 import Button from "../atoms/Button";
-import InputBox from "../atoms/InputBox";
 import QuestionCards from "../atoms/QuestionCards";
 import { questions } from "./MatchingState.SelectBoard.questions";
 
@@ -56,7 +55,7 @@ export default function SelectComponents({
         );
       case "input":
         return (
-          <InputBox
+          <input
             type="tel"
             name="phone"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +66,7 @@ export default function SelectComponents({
                 handleChoice(e.target.value);
               }
             }}
-            maxlength="11"
+            maxLength={11}
             className="w-4/5"
           />
         );

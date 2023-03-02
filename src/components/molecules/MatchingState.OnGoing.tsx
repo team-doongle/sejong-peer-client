@@ -12,13 +12,15 @@ export default function StateOnGoing() {
   const { userStateRefetch } = useMatchUser();
   return (
     <>
-      <div
-        style={{ textAlign: "center", lineHeight: "24px", marginTop: "15px" }}
-      >
-        짝을 구하는 중입니다.
-      </div>
+      <img
+        src={"./assets/character/on_going.png"}
+        alt="charater"
+        className="w-36 h-36"
+      />
+      {/* style={{ textAlign: "center", lineHeight: "24px", marginTop: "15px" }} */}
+      <h2 className="mb-6 text-lg">짝을 구하는 중입니다</h2>
       <CurrentState />
-      <Margin size={3} />
+      <Margin size={2} />
       <Button
         value="취소하고 다시 찾기"
         onClick={async () => {
