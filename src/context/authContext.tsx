@@ -11,7 +11,8 @@ import { fetchLogin, fetchLogout } from "apis/auth";
 import { fetchRefreshAuth } from "apis/auth";
 import { FetchLoginRequest } from "apis/auth.type";
 import { storage } from "../utils/storage";
-import { useLoading } from "./loadingContext";
+import { useSetRecoilState } from "recoil";
+import { isLoadingState } from "store/global";
 
 export type AuthContextProps = {
   isAuth: boolean;
@@ -24,7 +25,7 @@ const AuthContext = createContext<AuthContextProps>(null!);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuth, setIsAuth] = useState(false);
-  const { setIsLoading } = useLoading();
+  const setIsLoading = useSetRecoilState(isLoadingState);
 
   const navigator = useNavigate();
 

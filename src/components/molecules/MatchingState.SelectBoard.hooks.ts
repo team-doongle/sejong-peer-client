@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useHorizonBoard } from "context/horizonBoardContext";
-import { useLoading } from "context/loadingContext";
 import { handleError } from "utils/handleError";
 import {
   registerPool,
@@ -9,6 +8,8 @@ import {
 } from "./MatchingState.SelectBoard.api";
 import { QuestionCardProps } from "../atoms/QuestionCards";
 import { questions } from "./MatchingState.SelectBoard.questions";
+import { isLoadingState } from "store/global";
+import { useSetRecoilState } from "recoil";
 
 export default function useSelectBoard() {
   const { itemIndex: questionIndex, movePrev, moveNext } = useHorizonBoard();
@@ -17,7 +18,7 @@ export default function useSelectBoard() {
   );
   const [disablePrev, setDisablePrev] = useState(false);
   const [disableNext, setDisableNext] = useState(false);
-  const { setIsLoading } = useLoading();
+  const setIsLoading = useSetRecoilState(isLoadingState);
   const { user, userStateRefetch } = useMatchUser();
   const { peerCounts } = useMatchPoolCounts({
     gender: answerList[0],

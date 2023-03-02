@@ -7,9 +7,9 @@ import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./styles/font.css";
 import { AuthProvider } from "./context/authContext";
-import { LoadingProvider } from "./context/loadingContext";
 
 import { worker } from "../mocks/browser";
+import { RecoilRoot } from "recoil";
 
 if (process.env.NODE_ENV === "development") {
   worker.start();
@@ -19,16 +19,16 @@ export const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <GlobalStyles />
-    <QueryClientProvider client={queryClient}>
-      <Toaster />
-      <BrowserRouter>
-        <LoadingProvider>
+    <RecoilRoot>
+      <GlobalStyles />
+      <QueryClientProvider client={queryClient}>
+        <Toaster />
+        <BrowserRouter>
           <AuthProvider>
             <App />
           </AuthProvider>
-        </LoadingProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </RecoilRoot>
   </React.StrictMode>
 );

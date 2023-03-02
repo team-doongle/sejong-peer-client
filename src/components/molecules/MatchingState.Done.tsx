@@ -1,13 +1,14 @@
-import { useLoading } from "context/loadingContext";
 import { handleError } from "utils/handleError";
 import { fetchPostBreak } from "apis/match";
 import Button from "../atoms/Button";
 import Margin from "../atoms/Margin";
 import { useMatchUser } from "./MatchingState.SelectBoard.api";
 import CurrentState from "./MatchingState.CurrentState";
+import { useSetRecoilState } from "recoil";
+import { isLoadingState } from "store/global";
 
 export default function StateDone() {
-  const { setIsLoading } = useLoading();
+  const setIsLoading = useSetRecoilState(isLoadingState);
   const { userStateRefetch } = useMatchUser();
   return (
     <>

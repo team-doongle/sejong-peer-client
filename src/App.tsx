@@ -1,3 +1,4 @@
+import Loading from "components/atoms/Loading";
 import { Navigate, Route } from "react-router";
 import { Routes } from "react-router-dom";
 import { useAuth } from "./context/authContext";
@@ -9,17 +10,20 @@ function App() {
   const { isAuth } = useAuth();
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={isAuth ? <RootPage /> : <Navigate to={"/login"} replace />}
-      />
-      <Route
-        path="/login"
-        element={!isAuth ? <LoginPage /> : <Navigate to={"/"} replace />}
-      />
-      <Route path="*" element={<ErrorPage />} />
-    </Routes>
+    <>
+      <Loading />
+      <Routes>
+        <Route
+          path="/"
+          element={isAuth ? <RootPage /> : <Navigate to={"/login"} replace />}
+        />
+        <Route
+          path="/login"
+          element={!isAuth ? <LoginPage /> : <Navigate to={"/"} replace />}
+        />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </>
   );
 }
 

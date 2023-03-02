@@ -1,12 +1,20 @@
+import { useRecoilValue } from "recoil";
+import { isLoadingState } from "store/global";
 import styled from "styled-components";
 
 export default function Loading() {
+  const isLoading = useRecoilValue(isLoadingState);
+
   return (
     <>
-      <StyledBlack />
-      <StyledContainer>
-        <img src="/assets/image/loading.gif" alt="loading" />
-      </StyledContainer>
+      {!isLoading ? null : (
+        <>
+          <StyledBlack />
+          <StyledContainer>
+            <img src="/assets/image/loading.gif" alt="loading" />
+          </StyledContainer>
+        </>
+      )}
     </>
   );
 }
