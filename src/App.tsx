@@ -1,13 +1,14 @@
 import Loading from "components/atoms/Loading";
 import { Navigate, Route } from "react-router";
 import { Routes } from "react-router-dom";
-import { useAuth } from "./context/authContext";
+import { useRecoilValue } from "recoil";
+import { isAuthState } from "store/global";
 import ErrorPage from "./pages/error";
 import LoginPage from "./pages/login";
 import RootPage from "./pages/root";
 
 function App() {
-  const { isAuth } = useAuth();
+  const isAuth = useRecoilValue(isAuthState);
 
   return (
     <>

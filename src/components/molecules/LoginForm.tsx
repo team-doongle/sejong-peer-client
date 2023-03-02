@@ -2,12 +2,12 @@ import * as S from "./LoginForm.styles";
 import ButtonLogin from "../atoms/ButtonLogin";
 import InputBox from "../atoms/InputBox";
 import useInput from "hooks/useInput";
-import { useAuth } from "context/authContext";
+import useLogin from "./LoginForm.hooks";
 
 export default function LoginForm() {
   const { input: id, onChange: onChangeId } = useInput("");
   const { input: password, onChange: onChangePassword } = useInput("");
-  const { login } = useAuth();
+  const { login } = useLogin();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useHorizonBoard } from "context/horizonBoardContext";
 import { handleError } from "utils/handleError";
 import {
   registerPool,
@@ -9,10 +8,13 @@ import {
 import { QuestionCardProps } from "../atoms/QuestionCards";
 import { questions } from "./MatchingState.SelectBoard.questions";
 import { isLoadingState } from "store/global";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { MatchingBoardIndexState } from "store/horizonBoard";
 
 export default function useSelectBoard() {
-  const { itemIndex: questionIndex, movePrev, moveNext } = useHorizonBoard();
+  const [itemIndex, setItemIndex] = useRecoilState(MatchingBoardIndexState);
+  const movePrev = () => setItemIndex(itemIndex - 1);
+  const moveNext = () => setItemIndex(itemIndex + 1);
   const [answerList, setAnswerList] = useState<string[]>(
     questions.map(() => "")
   );
@@ -29,13 +31,13 @@ export default function useSelectBoard() {
   });
 
   const checkReciveAnswer = () =>
-    answerList[questionIndex] &&
-    answerList[questionIndex].length > 0 &&
-    questions.length >= questionIndex;
+    answerList[itemIndex] &&
+    answerList[itemIndex].length > 0 &&
+    questions.length >= itemIndex;
 
   const handleChoice: QuestionCardProps["handleChoice"] = (choice) => {
     const newAnswerList = answerList.slice();
-    newAnswerList.splice(questionIndex, 1, choice);
+    newAnswerList.splice(itemIndex, 1, choice);
     setAnswerList(newAnswerList);
   };
 
@@ -67,6 +69,7 @@ export default function useSelectBoard() {
       });
 
       if (res.status === 200) {
+        setItemIndex(0);
         userStateRefetch();
         setIsLoading(false);
       } else throw new Error(`요청이 실패했습니다. error code: ${res.status}`);
@@ -77,20 +80,20 @@ export default function useSelectBoard() {
   };
 
   useEffect(() => {
-    if (answerList[questionIndex] && answerList[questionIndex].length) {
+    if (answerList[itemIndex] && answerList[itemIndex].length) {
       moveNext();
     }
     setDisableNext(!checkReciveAnswer());
   }, [answerList]);
 
   useEffect(() => {
-    setDisablePrev(questionIndex <= 0);
-    setDisableNext(questionIndex >= questions.length - 1);
+    setDisablePrev(itemIndex <= 0);
+    setDisableNext(itemIndex >= questions.length - 1);
     setDisableNext(!checkReciveAnswer());
-  }, [questionIndex]);
+  }, [itemIndex]);
 
   return {
-    questionIndex,
+    itemIndex,
     handleSubmit,
     handleChoice,
     peerCounts,

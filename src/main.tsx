@@ -6,7 +6,6 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./styles/font.css";
-import { AuthProvider } from "./context/authContext";
 
 import { worker } from "../mocks/browser";
 import { RecoilRoot } from "recoil";
@@ -24,9 +23,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <QueryClientProvider client={queryClient}>
         <Toaster />
         <BrowserRouter>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
+          <App />
         </BrowserRouter>
       </QueryClientProvider>
     </RecoilRoot>

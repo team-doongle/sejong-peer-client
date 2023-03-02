@@ -1,4 +1,3 @@
-import { HorizonBoardProvider } from "context/horizonBoardContext";
 import { useMatchUser } from "./MatchingState.SelectBoard.api";
 import SelectBoard from "./MatchingState.SelectBoard";
 import StateDone from "./MatchingState.Done";
@@ -10,9 +9,7 @@ export default function MatchingState() {
   return (
     <>
       {user?.state === "NOT_REGISTER" ? (
-        <HorizonBoardProvider>
-          <SelectBoard />
-        </HorizonBoardProvider>
+        <SelectBoard />
       ) : user?.state === "ON_GOING" ? (
         <StateOnGoing />
       ) : user?.state === "DONE" ? (

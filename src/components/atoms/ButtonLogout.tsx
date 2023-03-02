@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { useAuth } from "../../context/authContext";
 import { color } from "../../styles/palette";
+import useLogout from "./ButtonLogout.hooks";
 
 export default function ButtonLogout() {
-  const { logout } = useAuth();
+  const { logout } = useLogout();
+
   return (
     <>
       <StyledButton type="button" onClick={() => logout()}>

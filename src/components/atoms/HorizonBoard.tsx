@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { useHorizonBoard } from "../../context/horizonBoardContext";
 
 export default function HorizonBoard({
-  itemWidth = 400,
   itemComponents,
+  itemIndex,
+  itemWidth = 400,
 }: {
   itemComponents: ReactNode[];
+  itemIndex: number;
   itemWidth?: number;
 }) {
-  const { itemIndex } = useHorizonBoard();
   return (
     <>
       <StyledContainer itemWidth={itemWidth}>
