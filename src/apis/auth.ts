@@ -3,7 +3,7 @@ import {
   FetchLoginRequest,
   FetchLoginResponse,
   FetchRefresh,
-} from "../models/authSchema";
+} from "./auth.type";
 
 export const fetchLogin = (props: FetchLoginRequest) => {
   return instance.post<FetchLoginResponse>("login", props);

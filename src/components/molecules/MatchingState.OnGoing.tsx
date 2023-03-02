@@ -1,7 +1,6 @@
-import styled from "styled-components";
-import { useLoading } from "../../context/loadingContext";
-import { handleError } from "../../utils/handleError";
-import { fetchPostBreak } from "../../services/apis/match";
+import { useLoading } from "context/loadingContext";
+import { handleError } from "utils/handleError";
+import { fetchPostBreak } from "apis/match";
 import Button from "../atoms/Button";
 import Margin from "../atoms/Margin";
 import { useMatchUser } from "./MatchingState.SelectBoard.api";

@@ -1,11 +1,11 @@
 import axios from "axios";
-import { storage } from "../../utils/storage";
+import { storage } from "utils/storage";
 import {
   FetchGetPoolRequest,
   FetchGetPoolResponse,
   FetchGetUserResponse,
   FetchPostPoolRequest,
-} from "../models/matchSchema";
+} from "./match.type";
 
 export const fetchGetPool = (props: FetchGetPoolRequest) => {
   return instance.get<FetchGetPoolResponse>("pool", { params: props });

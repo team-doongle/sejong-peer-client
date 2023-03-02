@@ -7,9 +7,9 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleError } from "../utils/handleError";
-import { fetchLogin, fetchLogout } from "../services/apis/auth";
-import { fetchRefreshAuth } from "../services/apis/auth";
-import { FetchLoginRequest } from "../services/models/authSchema";
+import { fetchLogin, fetchLogout } from "apis/auth";
+import { fetchRefreshAuth } from "apis/auth";
+import { FetchLoginRequest } from "apis/auth.type";
 import { storage } from "../utils/storage";
 import { useLoading } from "./loadingContext";
 

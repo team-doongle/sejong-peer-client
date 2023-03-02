@@ -1,9 +1,5 @@
 import { useQuery } from "react-query";
-import {
-  fetchGetPool,
-  fetchGetUser,
-  fetchPostPool,
-} from "../../services/apis/match";
+import { fetchGetPool, fetchGetUser, fetchPostPool } from "apis/match";
 import {
   constTypeCheck,
   FetchPostPoolRequest,
@@ -11,7 +7,7 @@ import {
   purposeConstArray,
   targetBoundaryConstArray,
   targetGenderConstArray,
-} from "../../services/models/matchSchema";
+} from "apis/match.type";
 
 export const useMatchUser = () => {
   const { data: user, refetch: userStateRefetch } = useQuery(

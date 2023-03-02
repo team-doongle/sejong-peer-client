@@ -1,4 +1,4 @@
-import { HorizonBoardProvider } from "../../context/horizonBoardContext";
+import { HorizonBoardProvider } from "context/horizonBoardContext";
 import { useMatchUser } from "./MatchingState.SelectBoard.api";
 import SelectBoard from "./MatchingState.SelectBoard";
 import StateDone from "./MatchingState.Done";

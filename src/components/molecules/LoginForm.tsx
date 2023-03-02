@@ -1,8 +1,8 @@
 import * as S from "./LoginForm.styles";
 import ButtonLogin from "../atoms/ButtonLogin";
 import InputBox from "../atoms/InputBox";
-import useInput from "../../hooks/useInput";
-import { useAuth } from "../../context/authContext";
+import useInput from "hooks/useInput";
+import { useAuth } from "context/authContext";
 
 export default function LoginForm() {
   const { input: id, onChange: onChangeId } = useInput("");
