@@ -11,14 +11,11 @@ export default function ReleaseNotes() {
       <label htmlFor="my-modal-4" className="modal cursor-pointer">
         <label className="modal-box relative" htmlFor="">
           <h3 className="text-lg font-bold">Release Notes</h3>
-          <p className="py-4 text-gray-300">
-            coming up !
-            <br />• 매칭 취소 시 패널티 추가 예정
-          </p>
           <p className="py-4">
-            ver 1.1 | 2023.03.03
+            ver 1.1 | 2023.03.04
             <br />• 디자인 개선
             <br />• 릴리즈 노트 추가
+            <br />• 매칭 취소 시 매칭 유지 기간에 따른 패널티 추가
           </p>
           <p className="py-4">
             ver 1.0.HOTFIX | 2023.03.01 19:45
