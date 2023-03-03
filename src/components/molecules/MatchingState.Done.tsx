@@ -5,12 +5,14 @@ import Margin from "../atoms/Margin";
 import { useMatchUser } from "./MatchingState.SelectBoard.api";
 import CurrentState from "./MatchingState.CurrentState";
 import { useSetRecoilState } from "recoil";
-import { isLoadingState } from "store/global";
 import Celebration from "components/atoms/Celebration";
+import { isLoadingState } from "components/atoms/Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function StateDone() {
   const setIsLoading = useSetRecoilState(isLoadingState);
   const { userStateRefetch } = useMatchUser();
+  const navigator = useNavigate();
   return (
     <>
       <Celebration />
@@ -32,6 +34,7 @@ export default function StateDone() {
             if (res.status === 200) {
               userStateRefetch();
               setIsLoading(false);
+              navigator("/");
             } else
               throw new Error(
                 `관계 끊기 요청이 실패했습니다.\nerror code: ${res.status}`

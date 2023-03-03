@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useMatchUser } from "./MatchingState.SelectBoard.api";
 
 export default function CurrentState() {
@@ -42,18 +41,3 @@ export default function CurrentState() {
     </>
   );
 }
-
-const StyledFlex = styled.div`
-  display: flex;
-  & div {
-    margin-bottom: 15px;
-  }
-  & div:first-child {
-    margin: 0 10px;
-    width: 160px;
-  }
-
-  &:first-child {
-    margin-top: 30px;
-  }
-`;

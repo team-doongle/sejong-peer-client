@@ -1,79 +1,92 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { handleError } from "utils/handleError";
 import {
+  ClientMatchProps,
   registerPool,
-  useMatchPoolCounts,
-  useMatchUser,
 } from "./MatchingState.SelectBoard.api";
-import { QuestionCardProps } from "../atoms/QuestionCards";
+import { QuestionCardsProps } from "../atoms/QuestionCards";
 import { questions } from "./MatchingState.SelectBoard.questions";
-import { isLoadingState } from "store/global";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { MatchingBoardIndexState } from "store/horizonBoard";
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
+import { isLoadingState } from "components/atoms/Loading";
+
+import { atom } from "recoil";
+import { useNavigate } from "react-router-dom";
+
+export const currentBoardState = atom<{
+  index: number;
+  title: keyof ClientMatchProps;
+}>({
+  key: "currentBoardState",
+  default: {
+    index: 0,
+    title: "gender",
+  },
+});
+
+export const disableState = atom<{
+  disablePrev: boolean;
+  disableNext: boolean;
+}>({
+  key: "disableState",
+  default: { disablePrev: true, disableNext: true },
+});
+
+export const answersState = atom<ClientMatchProps>({
+  key: "answersState",
+  default: {
+    gender: null,
+    purpose: null,
+    targetGender: null,
+    gradeLimit: null,
+    studentNumberLimit: null,
+    targetBoundary: null,
+    phoneNumber: null,
+    result: null,
+  },
+});
 
 export default function useSelectBoard() {
-  const [itemIndex, setItemIndex] = useRecoilState(MatchingBoardIndexState);
-  const [answerList, setAnswerList] = useState<string[]>(
-    questions.map(() => "")
-  );
-  const [disablePrev, setDisablePrev] = useState(false);
-  const [disableNext, setDisableNext] = useState(false);
+  const [currentBoard, setCurrentBoard] = useRecoilState(currentBoardState);
+  const [answers, setAnswers] = useRecoilState(answersState);
+  const [disable, setDisable] = useRecoilState(disableState);
+  const resetCurrentBoard = useResetRecoilState(currentBoardState);
+  const resetAnswers = useResetRecoilState(answersState);
+  const resetDisable = useResetRecoilState(disableState);
+
+  const navigater = useNavigate();
+
   const setIsLoading = useSetRecoilState(isLoadingState);
-  const { user, userStateRefetch } = useMatchUser();
 
-  const { peerCounts } = useMatchPoolCounts({
-    gender: answerList[0],
-    purpose: answerList[1],
-    targetGender: answerList[2],
-    gradeLimit: answerList[3],
-    studentNumberLimit: answerList[4],
-  });
-
-  const movePrev = () => setItemIndex(itemIndex - 1);
-  const moveNext = () => setItemIndex(itemIndex + 1);
-
-  const checkReciveAnswer = () =>
-    answerList[itemIndex] &&
-    answerList[itemIndex].length > 0 &&
-    questions.length >= itemIndex;
-
-  const handleChoice: QuestionCardProps["handleChoice"] = (choice) => {
-    const newAnswerList = answerList.slice();
-    newAnswerList.splice(itemIndex, 1, choice);
-    setAnswerList(newAnswerList);
+  const movePrev = () => {
+    setCurrentBoard({
+      ...currentBoard,
+      index: currentBoard.index - 1,
+      title: questions[currentBoard.index - 1].key,
+    });
   };
-
+  const moveNext = () => {
+    setCurrentBoard({
+      ...currentBoard,
+      index: currentBoard.index + 1,
+      title: questions[currentBoard.index + 1].key,
+    });
+  };
+  const handleChoice: QuestionCardsProps["handleChoice"] = (choice, title) => {
+    setAnswers({ ...answers, [title]: choice });
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       setIsLoading(true);
 
-      const [
-        gender,
-        purpose,
-        targetGender,
-        gradeLimit,
-        studentNumberLimit,
-        targetBoundary,
-        phoneNumber,
-      ] = answerList;
-
-      if (!user) throw new Error("no user info");
-
-      const res = await registerPool({
-        gender,
-        purpose,
-        targetGender,
-        gradeLimit,
-        studentNumberLimit,
-        targetBoundary,
-        phoneNumber,
-      });
+      const res = await registerPool(answers);
 
       if (res.status === 200) {
-        setItemIndex(0);
-        userStateRefetch();
         setIsLoading(false);
+        navigater("/");
+        resetCurrentBoard();
+        resetAnswers();
+        resetDisable();
       } else throw new Error(`요청이 실패했습니다. error code: ${res.status}`);
     } catch (err) {
       handleError(err);
@@ -81,28 +94,24 @@ export default function useSelectBoard() {
     }
   };
 
+  const checkReciveAnswer = () => !!answers[currentBoard.title];
+
   useEffect(() => {
-    if (answerList[itemIndex] && answerList[itemIndex].length) {
+    if (answers[currentBoard.title]) {
       moveNext();
     }
-    setDisableNext(!checkReciveAnswer());
-  }, [answerList]);
+    setDisable({ ...disable, disableNext: !checkReciveAnswer() });
+  }, [answers]);
 
   useEffect(() => {
-    setDisablePrev(itemIndex <= 0);
-    setDisableNext(itemIndex >= questions.length - 1);
-    setDisableNext(!checkReciveAnswer());
-  }, [itemIndex]);
+    console.log(answers[currentBoard.title]);
+    setDisable({
+      ...disable,
+      disablePrev: currentBoard.index <= 0,
+      disableNext:
+        currentBoard.index >= questions.length - 1 || !checkReciveAnswer(),
+    });
+  }, [currentBoard.index]);
 
-  return {
-    itemIndex,
-    handleSubmit,
-    handleChoice,
-    peerCounts,
-    answerList,
-    movePrev,
-    disablePrev,
-    moveNext,
-    disableNext,
-  };
+  return { movePrev, moveNext, handleChoice, handleSubmit };
 }

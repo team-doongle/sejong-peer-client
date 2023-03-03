@@ -1,6 +1,12 @@
 import { useRecoilValue } from "recoil";
-import { isLoadingState } from "store/global";
 import styled from "styled-components";
+
+import { atom } from "recoil";
+
+export const isLoadingState = atom({
+  key: "isLoadingState",
+  default: false,
+});
 
 export default function Loading() {
   const isLoading = useRecoilValue(isLoadingState);

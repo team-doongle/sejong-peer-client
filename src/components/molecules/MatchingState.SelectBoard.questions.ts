@@ -1,9 +1,12 @@
+import { ClientMatchProps } from "./MatchingState.SelectBoard.api";
+
 export const questions: {
   title: string;
-  name?: string;
+  name: string;
   choices: string[];
   type: "select" | "input" | "submit" | "select-with-describe" | "range";
   imageSrc: string;
+  key: keyof ClientMatchProps | "result";
 }[] = [
   {
     title: "학우님의 성별을 선택해주세요.",
@@ -11,6 +14,7 @@ export const questions: {
     choices: ["남자", "여자"],
     type: "select",
     imageSrc: "/assets/character/1.jpg",
+    key: "gender",
   },
   {
     title: "원하시는 기능을 선택해주세요.",
@@ -18,6 +22,7 @@ export const questions: {
     choices: ["짝선배 구하기", "짝후배 구하기"],
     type: "select",
     imageSrc: "/assets/character/2.jpg",
+    key: "purpose",
   },
   {
     title: "같은 성별의 짝을 원하시나요?",
@@ -25,6 +30,7 @@ export const questions: {
     choices: ["동성", "상관 없음"],
     type: "select",
     imageSrc: "/assets/character/4.jpg",
+    key: "targetGender",
   },
   {
     title: "나와의 학년 차이는 최대 얼마까지 허용하시나요?",
@@ -32,6 +38,7 @@ export const questions: {
     choices: [],
     type: "range",
     imageSrc: "/assets/character/5.jpg",
+    key: "gradeLimit",
   },
   {
     title: "나와의 학번 차이는 최대 얼마까지 허용하시나요?",
@@ -39,6 +46,7 @@ export const questions: {
     choices: [],
     type: "range",
     imageSrc: "/assets/character/3.jpg",
+    key: "studentNumberLimit",
   },
   {
     title: "어떤 범위에서 찾길 원하시나요?",
@@ -46,6 +54,7 @@ export const questions: {
     choices: ["나와 같은 학과", "나와 같은 단과대", "상관 없음"],
     type: "select-with-describe",
     imageSrc: "/assets/character/4.jpg",
+    key: "targetBoundary",
   },
   {
     title: "매칭 결과를 안내받을 전화번호를 입력해주세요",
@@ -53,11 +62,14 @@ export const questions: {
     choices: [],
     type: "input",
     imageSrc: "/assets/character/5.jpg",
+    key: "phoneNumber",
   },
   {
     title: "입력하신 정보를 확인해주세요",
+    name: "결과 확인",
     choices: [],
     type: "submit",
     imageSrc: "/assets/character/6.jpg",
+    key: "result",
   },
 ];

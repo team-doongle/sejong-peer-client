@@ -2,25 +2,27 @@ import styled from "styled-components";
 import { useState, useEffect, useRef, Fragment, ReactNode } from "react";
 import ButtonChoice from "./ButtonChoice";
 
-export type QuestionCardProps = {
+export type QuestionCardsProps = {
+  title: string;
   choices: string[];
-  handleChoice: (choice: string) => void;
+  handleChoice: (choice: string | null, title: string) => void;
   describes?: ReactNode[];
 };
 
 export default function QuestionCards({
+  title,
   choices,
   handleChoice,
   describes,
-}: QuestionCardProps) {
+}: QuestionCardsProps) {
   const isInitailRendering = useRef(true);
-  const [selectedChoice, setSelectedChoice] = useState<string>("");
+  const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
 
   const checkSelected = (choice: string) => selectedChoice === choice;
 
   const onClickChoice = (selectedChoice: string) => {
     if (checkSelected(selectedChoice)) {
-      setSelectedChoice("");
+      setSelectedChoice(null);
     } else {
       setSelectedChoice(selectedChoice);
     }
@@ -28,7 +30,7 @@ export default function QuestionCards({
 
   useEffect(() => {
     if (isInitailRendering.current) isInitailRendering.current = false;
-    else handleChoice(selectedChoice);
+    else handleChoice(selectedChoice, title);
   }, [selectedChoice]);
 
   return (
@@ -38,7 +40,7 @@ export default function QuestionCards({
           <Fragment key={choice}>
             <ButtonChoice
               value={choice}
-              title={choice}
+              title={String(choice)}
               describe={describes?.[i]}
               onClick={() => onClickChoice(choice)}
               isSelected={checkSelected(choice)}

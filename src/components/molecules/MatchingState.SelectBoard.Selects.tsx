@@ -1,25 +1,33 @@
+import { useRecoilValue } from "recoil";
 import Button from "../atoms/Button";
-import QuestionCards from "../atoms/QuestionCards";
+import QuestionCards, { QuestionCardsProps } from "../atoms/QuestionCards";
+import { useMatchPoolCounts } from "./MatchingState.SelectBoard.api";
+import { answersState } from "./MatchingState.SelectBoard.hooks";
 import { questions } from "./MatchingState.SelectBoard.questions";
 
 export default function SelectComponents({
   handleChoice,
-  peerCounts,
-  answerList,
 }: {
-  handleChoice: (choice: string) => void;
-  peerCounts?: number[];
-  answerList: string[];
+  handleChoice: QuestionCardsProps["handleChoice"];
 }) {
-  return questions.map(({ choices, type, name }) => {
+  const answers = useRecoilValue(answersState);
+  const { peerCounts } = useMatchPoolCounts(answers);
+
+  return questions.map(({ choices, type, key }) => {
     switch (type) {
       case "select":
-        return <QuestionCards choices={choices} handleChoice={handleChoice} />;
+        return (
+          <QuestionCards
+            choices={choices}
+            handleChoice={handleChoice}
+            title={key}
+          />
+        );
       case "range":
         return (
           <select
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              handleChoice(e.target.value);
+              handleChoice(e.target.value, key);
             }}
           >
             <option disabled selected>
@@ -29,7 +37,7 @@ export default function SelectComponents({
             <option>2</option>
             <option>3</option>
             <option>4</option>
-            <option>상관없음</option>
+            <option>상관 없음</option>
           </select>
         );
       case "select-with-describe":
@@ -37,6 +45,7 @@ export default function SelectComponents({
           <QuestionCards
             choices={choices}
             handleChoice={handleChoice}
+            title={key}
             describes={peerCounts?.map((count) =>
               count ? (
                 <div>
@@ -63,7 +72,7 @@ export default function SelectComponents({
               e.target.value = onlyNumbers;
               if (e.target.value.length === 11) {
                 e.target.blur();
-                handleChoice(e.target.value);
+                handleChoice(e.target.value, key);
               }
             }}
             maxLength={11}
@@ -73,11 +82,15 @@ export default function SelectComponents({
       case "submit":
         return (
           <>
-            <div className="grid gap-4 grid-cols-2 w-4/5">
-              {answerList.map((e, i) => (
+            <div className="grid gap-4 grid-cols-2 w-4/5 mb-9">
+              {Object.values(answers).map((e, i) => (
                 <>
-                  <div>{questions[i].name}</div>
-                  <div>{e}</div>
+                  {questions[i].type === "submit" ? null : (
+                    <>
+                      <div>{questions[i].name}</div>
+                      <div>{e}</div>
+                    </>
+                  )}
                 </>
               ))}
             </div>

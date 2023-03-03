@@ -1,13 +1,17 @@
 import { useQuery } from "react-query";
 import { fetchGetPool, fetchGetUser, fetchPostPool } from "apis/match";
-import {
-  constTypeCheck,
-  FetchPostPoolRequest,
-  genderConstArray,
-  purposeConstArray,
-  targetBoundaryConstArray,
-  targetGenderConstArray,
-} from "apis/match.type";
+import { FetchPostPoolRequest } from "apis/match.type";
+
+export type ClientMatchProps = {
+  gender: "남자" | "여자" | null;
+  purpose: "짝선배 구하기" | "짝후배 구하기" | null;
+  targetGender: "동성" | "상관 없음" | null;
+  gradeLimit: "1" | "2" | "3" | "4" | "상관 없음" | null;
+  studentNumberLimit: "1" | "2" | "3" | "4" | "상관 없음" | null;
+  targetBoundary: "나와 같은 학과" | "나와 같은 단과대" | "상관 없음" | null;
+  phoneNumber: string | null;
+  result: null;
+};
 
 export const useMatchUser = () => {
   const { data: user, refetch: userStateRefetch } = useQuery(
@@ -28,32 +32,32 @@ export const useMatchPoolCounts = ({
   gradeLimit,
   studentNumberLimit,
 }: {
-  gender: string;
-  purpose: string;
-  targetGender: string;
-  gradeLimit: string;
-  studentNumberLimit: string;
+  gender: ClientMatchProps["gender"] | null;
+  purpose: ClientMatchProps["purpose"] | null;
+  targetGender: ClientMatchProps["targetGender"] | null;
+  gradeLimit: ClientMatchProps["gradeLimit"] | null;
+  studentNumberLimit: ClientMatchProps["studentNumberLimit"] | null;
 }) => {
   const { data: peerCounts } = useQuery(
     ["getPool", gender, purpose, targetGender, gradeLimit, studentNumberLimit],
     () =>
       fetchGetPool({
-        gender: convertData.gender(gender),
-        purpose: convertData.purpose(purpose),
+        gender: convertData.gender(gender!),
+        purpose: convertData.purpose(purpose!),
         targetGender: convertData.targetGender(
-          targetGender,
-          convertData.gender(gender)
+          targetGender!,
+          convertData.gender(gender!)
         ),
-        gradeLimit: convertData.gradeLimit(gradeLimit),
-        studentNumberLimit: convertData.studentNumberLimit(studentNumberLimit),
+        gradeLimit: convertData.gradeLimit(gradeLimit!),
+        studentNumberLimit: convertData.studentNumberLimit(studentNumberLimit!),
       }),
     {
       enabled:
-        gender !== "" &&
-        purpose !== "" &&
-        targetGender !== "" &&
-        gradeLimit !== "" &&
-        studentNumberLimit !== "",
+        !!gender &&
+        !!purpose &&
+        !!targetGender &&
+        !!gradeLimit &&
+        !!studentNumberLimit,
       select: ({ data }) => [data.major, data.college, data.all],
     }
   );
@@ -69,15 +73,7 @@ export const registerPool = async ({
   studentNumberLimit,
   targetBoundary,
   phoneNumber,
-}: {
-  gender: string;
-  purpose: string;
-  targetGender: string;
-  gradeLimit: string;
-  studentNumberLimit: string;
-  targetBoundary: string;
-  phoneNumber: string;
-}) => {
+}: ClientMatchProps) => {
   return fetchPostPool({
     gender: convertData.gender(gender),
     purpose: convertData.purpose(purpose),
@@ -93,51 +89,203 @@ export const registerPool = async ({
 };
 
 const convertData = {
-  gender: (gender: string): FetchPostPoolRequest["gender"] => {
-    const converted = gender === "남자" ? "MALE" : "FEMALE";
-    constTypeCheck(genderConstArray, converted);
-    return converted;
+  gender: (
+    gender: ClientMatchProps["gender"]
+  ): FetchPostPoolRequest["gender"] => {
+    switch (gender) {
+      case "남자":
+        return "MALE";
+      case "여자":
+        return "FEMALE";
+      default:
+        throw new Error(`wrong type : gender ${gender}`);
+    }
   },
-  purpose: (purpose: string): FetchPostPoolRequest["purpose"] => {
-    const converted = purpose === "짝선배 구하기" ? "GET_SENIOR" : "GET_JUNIOR";
-    constTypeCheck(purposeConstArray, converted);
-    return converted;
+  purpose: (
+    purpose: ClientMatchProps["purpose"]
+  ): FetchPostPoolRequest["purpose"] => {
+    switch (purpose) {
+      case "짝선배 구하기":
+        return "GET_SENIOR";
+      case "짝후배 구하기":
+        return "GET_JUNIOR";
+      default:
+        throw new Error(`wrong type : purpose ${purpose}`);
+    }
   },
   targetGender: (
-    targetGender: string,
+    targetGender: ClientMatchProps["targetGender"],
     myGender: FetchPostPoolRequest["gender"]
   ): FetchPostPoolRequest["targetGender"] => {
-    const converted = targetGender === "동성" ? myGender : "ALL";
-    constTypeCheck(targetGenderConstArray, converted);
-    return converted;
+    switch (targetGender) {
+      case "동성":
+        return myGender;
+      case "상관 없음":
+        return "ALL";
+      default:
+        throw new Error(`wrong type : targetGender ${targetGender}`);
+    }
   },
-  gradeLimit: (choice: string): FetchPostPoolRequest["gradeLimit"] => {
-    return choice === "상관없음" ? 99 : Number(choice);
+  gradeLimit: (
+    gradeLimit: ClientMatchProps["gradeLimit"]
+  ): FetchPostPoolRequest["gradeLimit"] => {
+    switch (gradeLimit) {
+      case "1":
+        return 1;
+      case "2":
+        return 2;
+      case "3":
+        return 3;
+      case "4":
+        return 4;
+      case "상관 없음":
+        return 99;
+      default:
+        throw new Error(`wrong type : gradeLimit ${gradeLimit}`);
+    }
   },
   studentNumberLimit: (
-    choice: string
+    studentNumberLimit: ClientMatchProps["studentNumberLimit"]
   ): FetchPostPoolRequest["studentNumberLimit"] => {
-    return choice === "상관없음" ? 99 : Number(choice);
+    switch (studentNumberLimit) {
+      case "1":
+        return 1;
+      case "2":
+        return 2;
+      case "3":
+        return 3;
+      case "4":
+        return 4;
+      case "상관 없음":
+        return 99;
+      default:
+        throw new Error(
+          `wrong type : studentNumberLimit ${studentNumberLimit}`
+        );
+    }
   },
 
   targetBoundary: (
-    targetBoundary: string
+    targetBoundary: ClientMatchProps["targetBoundary"]
   ): FetchPostPoolRequest["targetBoundary"] => {
-    const converted =
-      targetBoundary === "나와 같은 학과"
-        ? "MAJOR"
-        : targetBoundary === "나와 같은 단과대"
-        ? "COLLEGE"
-        : "ALL";
-    constTypeCheck(targetBoundaryConstArray, converted);
-    return converted;
+    switch (targetBoundary) {
+      case "나와 같은 학과":
+        return "MAJOR";
+      case "나와 같은 단과대":
+        return "COLLEGE";
+      case "상관 없음":
+        return "ALL";
+      default:
+        throw new Error(`wrong type : targetBoundary ${targetBoundary}`);
+    }
   },
 
-  phoneNumber: (phoneNumber: string): FetchPostPoolRequest["phoneNumber"] => {
-    if (!/(010([0-9]{8}))/.test(phoneNumber))
+  phoneNumber: (
+    phoneNumber: ClientMatchProps["phoneNumber"]
+  ): FetchPostPoolRequest["phoneNumber"] => {
+    if (!phoneNumber || !/(010([0-9]{8}))/.test(phoneNumber))
       throw new Error(
         "휴대폰 번호가 올바르지 않습니다.\n 입력하신 정보를 확인해주세요."
       );
     return phoneNumber;
   },
 };
+
+// const convertDataReverse = {
+//   gender: (
+//     gender: FetchPostPoolRequest["gender"]
+//   ): ClientMatchProps["gender"] => {
+//     switch (gender) {
+//       case "MALE":
+//         return "남자";
+//       case "FEMALE":
+//         return "여자";
+//       default:
+//         throw new Error(`wrong type : gender ${}`);
+//     }
+//   },
+//   purpose: (
+//     purpose: ClientMatchProps["purpose"]
+//   ): FetchPostPoolRequest["purpose"] => {
+//     switch (purpose) {
+//       case "짝선배 구하기":
+//         return "GET_SENIOR";
+//       case "짝후배 구하기":
+//         return "GET_JUNIOR";
+//       default:
+//         throw new Error(`wrong type : purpose ${}`);
+//     }
+//   },
+//   targetGender: (
+//     targetGender: ClientMatchProps["targetGender"],
+//     myGender: FetchPostPoolRequest["gender"]
+//   ): FetchPostPoolRequest["targetGender"] => {
+//     switch (targetGender) {
+//       case "동성":
+//         return myGender;
+//       case "상관 없음":
+//         return "ALL";
+//       default:
+//         throw new Error(`wrong type : targetGender ${}`);
+//     }
+//   },
+//   gradeLimit: (
+//     gradeLimit: ClientMatchProps["gradeLimit"]
+//   ): FetchPostPoolRequest["gradeLimit"] => {
+//     switch (gradeLimit) {
+//       case "1":
+//         return 1;
+//       case "2":
+//         return 2;
+//       case "3":
+//         return 3;
+//       case "4":
+//         return 4;
+//       case "상관 없음":
+//         return 99;
+//       default:
+//         throw new Error(`wrong type : gradeLimit ${}`);
+//     }
+//   },
+//   studentNumberLimit: (
+//     studentNumberLimit: ClientMatchProps["studentNumberLimit"]
+//   ): FetchPostPoolRequest["studentNumberLimit"] => {
+//     switch (studentNumberLimit) {
+//       case "1":
+//         return 1;
+//       case "2":
+//         return 2;
+//       case "3":
+//         return 3;
+//       case "4":
+//         return 4;
+//       case "상관 없음":
+//         return 99;
+//       default:
+//         throw new Error(`wrong type : studentNumberLimit ${}`);
+//     }
+//   },
+
+//   targetBoundary: (
+//     targetBoundary: ClientMatchProps["targetBoundary"]
+//   ): FetchPostPoolRequest["targetBoundary"] => {
+//     switch (targetBoundary) {
+//       case "나와 같은 학과":
+//         return "MAJOR";
+//       case "나와 같은 단과대":
+//         return "COLLEGE";
+//       case "상관 없음":
+//         return "ALL";
+//       default:
+//         throw new Error(`wrong type : targetBoundary ${}`);
+//     }
+//   },
+
+//   phoneNumber: (phoneNumber: string): FetchPostPoolRequest["phoneNumber"] => {
+//     if (!/(010([0-9]{8}))/.test(phoneNumber))
+//       throw new Error(
+//         "휴대폰 번호가 올바르지 않습니다.\n 입력하신 정보를 확인해주세요."
+//       );
+//     return phoneNumber;
+//   },
+// };

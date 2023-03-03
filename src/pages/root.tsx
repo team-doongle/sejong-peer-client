@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import styled from "styled-components";
 import ButtonLogout from "../components/atoms/ButtonLogout";
 import Layout from "../components/atoms/Layout";
@@ -8,7 +9,9 @@ export default function RootPage() {
     <Layout>
       <ButtonLogout />
       <StyledContainer>
-        <MatchingState />
+        <Suspense fallback={<div>Loading...</div>}>
+          <MatchingState />
+        </Suspense>
       </StyledContainer>
     </Layout>
   );

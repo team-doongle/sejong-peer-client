@@ -1,21 +1,21 @@
-import { useMatchUser } from "./MatchingState.SelectBoard.api";
 import SelectBoard from "./MatchingState.SelectBoard";
 import StateDone from "./MatchingState.Done";
 import StateOnGoing from "./MatchingState.OnGoing";
+import { useLoaderData } from "react-router-dom";
 
 export default function MatchingState() {
-  const { user } = useMatchUser();
+  const { state } = useLoaderData() as { state: string };
 
   return (
     <>
-      {user?.state === "NOT_REGISTER" ? (
+      {state === "NOT_REGISTER" ? (
         <SelectBoard />
-      ) : user?.state === "ON_GOING" ? (
+      ) : state === "ON_GOING" ? (
         <StateOnGoing />
-      ) : user?.state === "DONE" ? (
+      ) : state === "DONE" ? (
         <StateDone />
       ) : (
-        <div>no state</div>
+        <div>{state}</div>
       )}
     </>
   );
