@@ -26,4 +26,11 @@ input {
   .btn-brown {
     @apply w-4/5 h-[32px] border-0 bg-[#5F4B30] rounded text-white flex-shrink-0 hover:cursor-pointer;
   }
+  .btn-red {
+    @apply w-4/5 h-[32px] border-0 bg-[#EB5757] rounded text-white flex-shrink-0 hover:cursor-pointer;
+  }
+
+  .btn-gray {
+    @apply w-4/5 h-[32px] border-0 bg-[#3d4451] rounded text-white flex-shrink-0 hover:cursor-pointer;
+  }
 }

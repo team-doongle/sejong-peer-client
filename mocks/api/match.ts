@@ -27,7 +27,7 @@ const matchApi = [
   rest.post(
     `${import.meta.env.VITE_BACKEND_URL}/match/break`,
     (_req, res, ctx) => {
-      dummy.userRes.state = "NOT_REGISTER";
+      dummy.userRes.state = "BLOCKED";
       return res(ctx.status(200));
     }
   ),
@@ -48,6 +48,7 @@ const dummy = {
     studentNumberLimit: 99,
     targetBoundary: "major",
     phoneNumber: "01012341234",
+    kakaoId: "asdf1234",
     unblockTime: new Date(),
   },
 };
