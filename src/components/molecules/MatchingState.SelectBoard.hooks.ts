@@ -41,6 +41,7 @@ export const answersState = atom<ClientMatchProps>({
     studentNumberLimit: null,
     targetBoundary: null,
     phoneNumber: null,
+    kakaoId: null,
     result: null,
   },
 });
@@ -104,7 +105,6 @@ export default function useSelectBoard() {
   }, [answers]);
 
   useEffect(() => {
-    console.log(answers[currentBoard.title]);
     setDisable({
       ...disable,
       disablePrev: currentBoard.index <= 0,

@@ -6,11 +6,12 @@ export type FetchPostPoolRequest = {
   studentNumberLimit: 1 | 2 | 3 | 4 | 99;
   targetBoundary: "MAJOR" | "COLLEGE" | "ALL";
   phoneNumber: string; // 01012341234
+  kakaoId: string;
 };
 
 export type FetchGetPoolRequest = Omit<
   FetchPostPoolRequest,
-  "targetBoundary" | "phoneNumber"
+  "targetBoundary" | "phoneNumber" | "kakaoId"
 >;
 
 export type FetchGetPoolResponse = {
@@ -23,4 +24,7 @@ export type FetchGetUserResponse = {
   state: "NOT_REGISTER" | "ON_GOING" | "DONE";
   grade: string;
   studentNumber: string;
+  unblockTitme: Date;
+  matchedTime: Date;
+  yellowCard: number;
 } & FetchPostPoolRequest;

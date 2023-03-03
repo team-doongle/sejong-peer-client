@@ -9,8 +9,12 @@ const matchApi = [
   ),
   rest.post(
     `${import.meta.env.VITE_BACKEND_URL}/match/pool`,
-    (_req, res, ctx) => {
+    async (req, res, ctx) => {
       dummy.userRes.state = "ON_GOING";
+      dummy.userRes = {
+        ...dummy.userRes,
+        ...(await req.json().then((data) => data)),
+      };
       return res(ctx.status(200));
     }
   ),

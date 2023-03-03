@@ -1,6 +1,5 @@
 import { handleError } from "utils/handleError";
 import { fetchPostBreak } from "apis/match";
-import Button from "../atoms/Button";
 import Margin from "../atoms/Margin";
 import { useMatchUser } from "./MatchingState.SelectBoard.api";
 import CurrentState from "./MatchingState.CurrentState";
@@ -25,8 +24,8 @@ export default function StateDone() {
       <p className="mb-10">문자메시지를 확인해주세요</p>
       <CurrentState />
       <Margin size={3} />
-      <Button
-        value="취소하고 다시 찾기"
+      <button
+        className="btn-brown"
         onClick={async () => {
           try {
             setIsLoading(true);
@@ -44,7 +43,9 @@ export default function StateDone() {
             setIsLoading(false);
           }
         }}
-      />
+      >
+        취소하고 다시 찾기
+      </button>
     </>
   );
 }

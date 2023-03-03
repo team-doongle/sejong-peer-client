@@ -21,3 +21,9 @@ input {
   border-bottom: 1px solid black;
   padding: 0 8px;
 }
+
+@layer components {
+  .btn-brown {
+    @apply w-4/5 h-[32px] border-0 bg-[#5F4B30] rounded text-white flex-shrink-0 hover:cursor-pointer;
+  }
+}

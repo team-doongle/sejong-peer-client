@@ -4,7 +4,13 @@ export const questions: {
   title: string;
   name: string;
   choices: string[];
-  type: "select" | "input" | "submit" | "select-with-describe" | "range";
+  type:
+    | "select"
+    | "input"
+    | "submit"
+    | "select-with-describe"
+    | "range"
+    | "input-id";
   imageSrc: string;
   key: keyof ClientMatchProps | "result";
 }[] = [
@@ -63,6 +69,14 @@ export const questions: {
     type: "input",
     imageSrc: "/assets/character/5.jpg",
     key: "phoneNumber",
+  },
+  {
+    title: "짝에게 전달될 카카오톡 아이디를 입력해주세요",
+    name: "카카오톡 아이디",
+    choices: [],
+    type: "input-id",
+    imageSrc: "/assets/character/2.jpg",
+    key: "kakaoId",
   },
   {
     title: "입력하신 정보를 확인해주세요",

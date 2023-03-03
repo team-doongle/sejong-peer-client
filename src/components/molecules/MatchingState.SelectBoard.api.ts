@@ -10,6 +10,7 @@ export type ClientMatchProps = {
   studentNumberLimit: "1" | "2" | "3" | "4" | "상관 없음" | null;
   targetBoundary: "나와 같은 학과" | "나와 같은 단과대" | "상관 없음" | null;
   phoneNumber: string | null;
+  kakaoId: string | null;
   result: null;
 };
 
@@ -73,6 +74,7 @@ export const registerPool = async ({
   studentNumberLimit,
   targetBoundary,
   phoneNumber,
+  kakaoId,
 }: ClientMatchProps) => {
   return fetchPostPool({
     gender: convertData.gender(gender),
@@ -85,6 +87,7 @@ export const registerPool = async ({
     studentNumberLimit: convertData.studentNumberLimit(studentNumberLimit),
     targetBoundary: convertData.targetBoundary(targetBoundary),
     phoneNumber: convertData.phoneNumber(phoneNumber),
+    kakaoId: convertData.kakaoId(kakaoId),
   });
 };
 
@@ -188,6 +191,15 @@ const convertData = {
         "휴대폰 번호가 올바르지 않습니다.\n 입력하신 정보를 확인해주세요."
       );
     return phoneNumber;
+  },
+  kakaoId: (
+    kakaoId: ClientMatchProps["kakaoId"]
+  ): FetchPostPoolRequest["kakaoId"] => {
+    if (!kakaoId)
+      throw new Error(
+        "카카오 아이디가 올바르지 않습니다.\n 입력하신 정보를 확인해주세요."
+      );
+    return kakaoId;
   },
 };
 

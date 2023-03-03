@@ -1,9 +1,9 @@
 import { useRecoilValue } from "recoil";
-import Button from "../atoms/Button";
 import QuestionCards, { QuestionCardsProps } from "../atoms/QuestionCards";
 import { useMatchPoolCounts } from "./MatchingState.SelectBoard.api";
 import { answersState } from "./MatchingState.SelectBoard.hooks";
 import { questions } from "./MatchingState.SelectBoard.questions";
+import { useState } from "react";
 
 export default function SelectComponents({
   handleChoice,
@@ -12,6 +12,7 @@ export default function SelectComponents({
 }) {
   const answers = useRecoilValue(answersState);
   const { peerCounts } = useMatchPoolCounts(answers);
+  const [kakaoId, setKakaoId] = useState("");
 
   return questions.map(({ choices, type, key }) => {
     switch (type) {
@@ -79,6 +80,31 @@ export default function SelectComponents({
             className="w-4/5"
           />
         );
+      case "input-id":
+        return (
+          <div className="flex w-4/5">
+            <input
+              type="text"
+              name="id"
+              onChange={(e) => {
+                setKakaoId(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleChoice(kakaoId, key);
+                }
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => handleChoice(kakaoId, key)}
+              className={"btn-brown w-1/3 ml-4"}
+            >
+              확인
+            </button>
+          </div>
+        );
       case "submit":
         return (
           <>
@@ -94,7 +120,9 @@ export default function SelectComponents({
                 </>
               ))}
             </div>
-            <Button value="제출하기" type="submit" />
+            <button type="submit" className="btn-brown">
+              제출하기
+            </button>
           </>
         );
     }
