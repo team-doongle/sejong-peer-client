@@ -24,7 +24,7 @@ export type FetchGetUserResponse = {
   state: "NOT_REGISTER" | "ON_GOING" | "DONE";
   grade: string;
   studentNumber: string;
-  unblockTitme: Date;
+  unblockTime: Date;
   matchedTime: Date;
   yellowCard: number;
 } & FetchPostPoolRequest;
