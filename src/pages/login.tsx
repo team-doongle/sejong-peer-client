@@ -2,10 +2,12 @@ import ReleaseNotes from "components/atoms/ReleaseNotes";
 import styled from "styled-components";
 import MainLogo from "../components/atoms/MainLogo";
 import LoginForm from "../components/molecules/LoginForm";
+import Loading from "components/atoms/Loading";
 
 export default function LoginPage() {
   return (
     <>
+      <Loading />
       <StyledContainer>
         <StyledWrapper>
           <ReleaseNotes />

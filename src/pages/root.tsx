@@ -1,3 +1,4 @@
+import Loading from "components/atoms/Loading";
 import { Suspense } from "react";
 import styled from "styled-components";
 import ButtonLogout from "../components/atoms/ButtonLogout";
@@ -6,14 +7,17 @@ import MatchingState from "../components/molecules/MatchingState";
 
 export default function RootPage() {
   return (
-    <Layout>
-      <ButtonLogout />
-      <StyledContainer>
-        <Suspense fallback={<div>Loading...</div>}>
-          <MatchingState />
-        </Suspense>
-      </StyledContainer>
-    </Layout>
+    <>
+      <Loading />
+      <Layout>
+        <ButtonLogout />
+        <StyledContainer>
+          <Suspense fallback={<div>Loading...</div>}>
+            <MatchingState />
+          </Suspense>
+        </StyledContainer>
+      </Layout>
+    </>
   );
 }
 
