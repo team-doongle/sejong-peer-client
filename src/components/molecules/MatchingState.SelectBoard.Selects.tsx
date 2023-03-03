@@ -120,6 +120,15 @@ export default function SelectComponents({
                 </>
               ))}
             </div>
+            <p className="text-sm text-gray-600 text-center">
+              제출하실 정보는 서비스 제공을 위해 일정기간 저장됩니다.
+              <br />
+              매칭 이후 상대방과 발생하는 분쟁에 대해서는
+              <br />
+              서비스 제공자가 책임질 수 없습니다.
+              <br />
+              해당 내용에 동의하시면 제출하기 버튼을 눌러주세요.
+            </p>
             <button type="submit" className="btn-brown">
               제출하기
             </button>
