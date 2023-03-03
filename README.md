@@ -19,7 +19,11 @@ yarn dev
 ## 데모 영상
 
 
-https://user-images.githubusercontent.com/46833758/222121579-f6701f73-4fe9-416c-bb03-39911612d2e8.mp4
+
+
+https://user-images.githubusercontent.com/46833758/222825433-9aea08d0-04c8-4ce0-8896-d0200c06ac78.mp4
+
+
 
 
 ## 프로젝트 배경
