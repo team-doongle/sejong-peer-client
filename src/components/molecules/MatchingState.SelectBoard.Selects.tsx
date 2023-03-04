@@ -95,6 +95,7 @@ export default function SelectComponents({
                   handleChoice(kakaoId, key);
                 }
               }}
+              maxLength={20}
             />
             <button
               type="button"
