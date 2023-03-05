@@ -35,3 +35,6 @@ https://user-images.githubusercontent.com/46833758/222825433-9aea08d0-04c8-4ce0-
 
 - 학사정보 시스템 api과 연동해 회원가입 없이 재학생 인증 가능
 - 모바일 환경을 고려한 UX
+
+## 회고록
+https://ggsno.tistory.com/28
