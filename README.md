@@ -37,4 +37,4 @@ https://user-images.githubusercontent.com/46833758/222825433-9aea08d0-04c8-4ce0-
 - 모바일 환경을 고려한 UX
 
 ## 회고록
-https://ggsno.tistory.com/28
+[웹서비스 기획부터 운영까지 / 대학생 짝선배 짝후배 매칭 웹 개발 회고](https://ggsno.tistory.com/28)
