@@ -19,7 +19,11 @@ yarn dev
 ## 데모 영상
 
 
-https://user-images.githubusercontent.com/46833758/222121579-f6701f73-4fe9-416c-bb03-39911612d2e8.mp4
+
+
+https://user-images.githubusercontent.com/46833758/222825433-9aea08d0-04c8-4ce0-8896-d0200c06ac78.mp4
+
+
 
 
 ## 프로젝트 배경
@@ -31,3 +35,6 @@ https://user-images.githubusercontent.com/46833758/222121579-f6701f73-4fe9-416c-
 
 - 학사정보 시스템 api과 연동해 회원가입 없이 재학생 인증 가능
 - 모바일 환경을 고려한 UX
+
+## 회고록
+[웹서비스 기획부터 운영까지 / 대학생 짝선배 짝후배 매칭 웹 개발 회고](https://ggsno.tistory.com/28)
