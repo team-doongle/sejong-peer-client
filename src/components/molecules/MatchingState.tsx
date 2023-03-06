@@ -3,9 +3,10 @@ import StateDone from "./MatchingState.Done";
 import StateOnGoing from "./MatchingState.OnGoing";
 import { useLoaderData } from "react-router-dom";
 import StateBlocked from "./MatchingState.Blocked";
+import { FetchGetUserResponse } from "apis/match.type";
 
 export default function MatchingState() {
-  const { state } = useLoaderData() as { state: string };
+  const { state } = useLoaderData() as { state: FetchGetUserResponse["state"] };
 
   return (
     <>

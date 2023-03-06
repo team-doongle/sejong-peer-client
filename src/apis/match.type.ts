@@ -21,7 +21,7 @@ export type FetchGetPoolResponse = {
 };
 
 export type FetchGetUserResponse = {
-  state: "NOT_REGISTER" | "ON_GOING" | "DONE";
+  state: "NOT_REGISTER" | "ON_GOING" | "DONE" | "BLOCKED";
   grade: string;
   studentNumber: string;
   unblockTime: Date;
