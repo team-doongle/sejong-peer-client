@@ -1,4 +1,3 @@
-import * as S from "./LoginForm.styles";
 import ButtonLogin from "../atoms/ButtonLogin";
 import useInput from "hooks/useInput";
 import useLogin from "./LoginForm.hooks";
@@ -15,14 +14,15 @@ export default function LoginForm() {
 
   return (
     <>
-      <S.Form onSubmit={handleSubmit}>
-        <S.Container>
-          <S.Wrapper>
+      <form onSubmit={handleSubmit}>
+        <div className="flex justify-center">
+          <div className="mr-[16px]">
             <input
               placeholder={"아이디"}
               value={id}
               onChange={onChangeId}
               required
+              className="mb-[16px]"
             />
             <input
               placeholder={"비밀번호"}
@@ -31,10 +31,10 @@ export default function LoginForm() {
               type="password"
               required
             />
-          </S.Wrapper>
+          </div>
           <ButtonLogin value={"로그인"} type={"submit"} />
-        </S.Container>
-      </S.Form>
+        </div>
+      </form>
     </>
   );
 }
