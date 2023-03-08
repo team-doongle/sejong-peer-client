@@ -35,7 +35,7 @@ export const questions: {
     name: "짝 성별",
     choices: ["동성", "상관 없음"],
     type: "select",
-    imageSrc: "/assets/character/4.jpg",
+    imageSrc: "/assets/character/3.jpg",
     key: "targetGender",
   },
   {
@@ -43,7 +43,7 @@ export const questions: {
     name: "학년 차이 허용 범위",
     choices: [],
     type: "range",
-    imageSrc: "/assets/character/5.jpg",
+    imageSrc: "/assets/character/4.jpg",
     key: "gradeLimit",
   },
   {
@@ -51,7 +51,7 @@ export const questions: {
     name: "학번 차이 허용 범위",
     choices: [],
     type: "range",
-    imageSrc: "/assets/character/3.jpg",
+    imageSrc: "/assets/character/5.jpg",
     key: "studentNumberLimit",
   },
   {
@@ -59,7 +59,7 @@ export const questions: {
     name: "짝 탐색 범위",
     choices: ["나와 같은 학과", "나와 같은 단과대", "상관 없음"],
     type: "select-with-describe",
-    imageSrc: "/assets/character/4.jpg",
+    imageSrc: "/assets/character/6.jpg",
     key: "targetBoundary",
   },
   {
@@ -67,7 +67,7 @@ export const questions: {
     name: "결과 전송 받을 전화번호",
     choices: [],
     type: "input",
-    imageSrc: "/assets/character/5.jpg",
+    imageSrc: "/assets/character/7.jpg",
     key: "phoneNumber",
   },
   {
@@ -75,7 +75,7 @@ export const questions: {
     name: "카카오톡 아이디",
     choices: [],
     type: "input-id",
-    imageSrc: "/assets/character/2.jpg",
+    imageSrc: "/assets/character/8.jpg",
     key: "kakaoId",
   },
   {
@@ -83,7 +83,7 @@ export const questions: {
     name: "결과 확인",
     choices: [],
     type: "submit",
-    imageSrc: "/assets/character/6.jpg",
+    imageSrc: "/assets/character/9.jpg",
     key: "result",
   },
 ];

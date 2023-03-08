@@ -7,7 +7,7 @@ export default function StateBlocked() {
   return (
     <>
       <img
-        src={"./assets/character/4.jpg"}
+        src={"./assets/character/police.png"}
         alt="charater"
         className="w-36 h-36"
       />
