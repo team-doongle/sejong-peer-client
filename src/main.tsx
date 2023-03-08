@@ -1,14 +1,13 @@
+import "./styles/font.css";
+import "./styles/main.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { RecoilRoot } from "recoil";
 import { RouterProvider } from "react-router-dom";
+import { router } from "pages/router";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
-import "./styles/font.css";
-import "./main.css";
-
 import { worker } from "../mocks/browser";
-import { RecoilRoot } from "recoil";
-import { router } from "pages/router";
 
 if (process.env.NODE_ENV === "development") {
   worker.start();

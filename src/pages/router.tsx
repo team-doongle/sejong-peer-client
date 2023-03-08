@@ -1,26 +1,42 @@
-import { fetchGetUser } from "apis/match";
-import { createBrowserRouter, json } from "react-router-dom";
-import { storage } from "utils/storage";
+import { createBrowserRouter, Navigate, redirect } from "react-router-dom";
+import { ErrorBoundary } from "./error/errorBoundary";
 import LoginPage from "./login";
-import RootPage from "./root";
-import RootBoundary from "./RootBoundary";
+import MatePage from "./mate";
+import loadUserState from "./mate/loader";
+import loadCheckAuthed from "./login/loader";
+import isAuthentificated from "utils/authentificate";
 
 export const path = {
   root: "/",
-  login: "login",
+  login: "/login",
+  lobby: "/mate", // 임시 로비
+  mate: "/mate",
 };
 
 export const router = createBrowserRouter([
   {
     path: path.root,
-    element: <RootPage />,
-    loader: async () => {
-      if (!storage.get("ACCESS_TOKEN")) {
-        throw json("", { status: 401 });
-      }
-      return (await fetchGetUser()).data;
-    },
-    errorElement: <RootBoundary />,
+    loader: loadAuthentification,
+    errorElement: <ErrorBoundary />,
+    element: <Navigate to={path.lobby} replace />,
   },
-  { path: path.login, element: <LoginPage /> },
+  {
+    path: path.login,
+    loader: loadCheckAuthed,
+    errorElement: <ErrorBoundary />,
+    element: <LoginPage />,
+  },
+  {
+    path: path.mate,
+    loader: loadUserState,
+    errorElement: <ErrorBoundary />,
+    element: <MatePage />,
+  },
 ]);
+
+async function loadAuthentification() {
+  if (!isAuthentificated()) {
+    return redirect(path.login);
+  }
+  return redirect(path.lobby);
+}

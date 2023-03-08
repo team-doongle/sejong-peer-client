@@ -1,26 +1,19 @@
-import Layout from "components/atoms/Layout";
 import {
   isRouteErrorResponse,
   Navigate,
   useRouteError,
 } from "react-router-dom";
-import { path } from "./router";
+import { path } from "../router";
+import NotFoundPage from "./notFound";
 
-export default function RootBoundary() {
+export function ErrorBoundary() {
   const error = useRouteError();
 
   console.error(error);
 
   if (isRouteErrorResponse(error)) {
     if (error.status === 404) {
-      return (
-        <Layout>
-          <div>
-            찾을 수 없는 페이지입니다.
-            <br /> 관리자에게 문의해주세요.
-          </div>
-        </Layout>
-      );
+      return <NotFoundPage />;
     }
 
     if (error.status === 401) {
