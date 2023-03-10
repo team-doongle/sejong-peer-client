@@ -3,14 +3,19 @@ export default function ReleaseNotes() {
     <>
       <label
         htmlFor="my-modal-4"
-        className="self-end text-sm hover:cursor-pointer"
+        className="self-end hover:cursor-pointer text-right"
       >
-        <span className="badge badge-md">ver 1.1</span>
+        <p className="text-sm">최근 업데이트 날짜: 23년 3월 10일</p>
+        <p className="badge badge-md">ver 1.2</p>
       </label>
       <input type="checkbox" id="my-modal-4" className="modal-toggle" />
       <label htmlFor="my-modal-4" className="modal cursor-pointer">
         <label className="modal-box relative" htmlFor="">
           <h3 className="text-lg font-bold">Release Notes</h3>
+          <p className="py-4">
+            ver 1.2 | 2023.03.10
+            <br />• 같은학과 매칭 안되는 오류 수정
+          </p>
           <p className="py-4">
             ver 1.1 | 2023.03.04
             <br />• 디자인 개선
