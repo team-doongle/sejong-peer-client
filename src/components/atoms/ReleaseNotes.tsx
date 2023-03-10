@@ -5,7 +5,7 @@ export default function ReleaseNotes() {
         htmlFor="my-modal-4"
         className="self-end text-sm hover:cursor-pointer"
       >
-        <span className="badge badge-primary badge-md">new</span> ver 1.1
+        <span className="badge badge-md">ver 1.1</span>
       </label>
       <input type="checkbox" id="my-modal-4" className="modal-toggle" />
       <label htmlFor="my-modal-4" className="modal cursor-pointer">

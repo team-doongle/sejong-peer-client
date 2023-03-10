@@ -18,14 +18,14 @@ export default function LoginForm() {
         <div className="flex justify-center">
           <div className="mr-[16px]">
             <input
-              placeholder={"아이디"}
+              placeholder={"학사정보시스템 아이디"}
               value={id}
               onChange={onChangeId}
               required
               className="mb-[16px]"
             />
             <input
-              placeholder={"비밀번호"}
+              placeholder={"학사정보시스템 비밀번호"}
               value={password}
               onChange={onChangePassword}
               type="password"
