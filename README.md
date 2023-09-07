@@ -10,12 +10,6 @@ yarn dev
 ```
 개발 모드로 실행시 모킹데이터로 실행
 
-## 배포 사이트
-
-[https://sejongpeer.com](https://sejongpeer.com)
-
-(세종대 재학생만 이용 가능)
-
 ## 데모 영상
 
 
